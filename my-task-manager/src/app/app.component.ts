@@ -6,6 +6,7 @@ import { TaskFormComponent } from './task-form/task-form.component';
 import { ToDoListComponent } from './to-do-list/to-do-list.component';
 import { UserFeedbackComponent } from './user-feedback/user-feedback.component';
 import { CommonModule } from '@angular/common';
+import { ShareToDoListComponent } from './share-to-do-list/share-to-do-list.component';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ import { CommonModule } from '@angular/common';
     HeaderComponent,
     TaskFormComponent,
     ToDoListComponent,
+    ShareToDoListComponent,
     UserFeedbackComponent,
     CommonModule,
   ],
