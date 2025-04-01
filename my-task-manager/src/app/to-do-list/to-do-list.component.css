@@ -10,3 +10,12 @@ ul {
   list-style-type: none;
   margin-top: 4px;
 }
+
+.toDoList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  background-color: rgb(208, 152, 9);
+}
