@@ -3,11 +3,17 @@
 html,
 body {
   height: 100%;
-  background-image: radial-gradient(white, bisque);
 }
 body {
-  margin: 0;
   font-family: "Fraunces", serif;
+  background-color: #f8f5ff; /* Soft lavender background */
+  color: #444;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
 .fraunces-font {
@@ -18,6 +24,15 @@ body {
   font-variation-settings: "SOFT" 0, "WONK" 0;
 }
 
-button:hover {
+button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
   cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+button:hover {
+  opacity: 0.8;
 }
