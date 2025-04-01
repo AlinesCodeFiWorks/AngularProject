@@ -16,6 +16,7 @@ export interface Task {
 @Component({
   selector: 'app-to-do-list',
   imports: [MatCheckboxModule, FormsModule],
+  standalone: true,
   templateUrl: './to-do-list.component.html',
   styleUrl: './to-do-list.component.css',
 })
