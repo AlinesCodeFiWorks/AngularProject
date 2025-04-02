@@ -15,7 +15,7 @@ export class TaskFormComponent {
     description: '',
     dueDate: undefined,
     completed: false,
-    subtasks: [],
+    subtasks: [{ name: '', completed: false }],
   };
   addTask(newTask: Task) {
     console.log('Task added:', newTask);

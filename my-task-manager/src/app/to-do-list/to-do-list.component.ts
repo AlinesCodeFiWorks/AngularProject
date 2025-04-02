@@ -14,6 +14,10 @@ export interface Task {
   completed: boolean;
   subtasks?: Task[];
 }
+export interface subTask {
+  subtasks?: { name: string; completed: boolean }[];
+  //TODO: add subtasks to the task interface
+}
 
 @Component({
   selector: 'app-to-do-list',
@@ -55,6 +59,18 @@ export class ToDoListComponent {
         task.subtasks![index].completed = completed;
         task.completed = task.subtasks?.every((t) => t.completed) ?? true;
       }
+      return { ...task };
+    });
+  }
+  deleteTask(task: Task) {
+    this.task.update((task) => {
+      task.subtasks = task.subtasks?.filter((t) => t !== task);
+      return { ...task };
+    });
+  }
+  deleteSubtask(subtask: Task) {
+    this.task.update((task) => {
+      task.subtasks = task.subtasks?.filter((t) => t !== subtask);
       return { ...task };
     });
   }
