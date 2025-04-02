@@ -9,6 +9,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
 export interface Task {
   name: string;
+  description?: string;
+  dueDate?: Date;
   completed: boolean;
   subtasks?: Task[];
 }
@@ -23,6 +25,8 @@ export interface Task {
 export class ToDoListComponent {
   readonly task = signal<Task>({
     name: 'Parent task',
+    description: 'Parent task description',
+    dueDate: new Date(),
     completed: false,
     subtasks: [
       { name: 'Child task 1', completed: false },

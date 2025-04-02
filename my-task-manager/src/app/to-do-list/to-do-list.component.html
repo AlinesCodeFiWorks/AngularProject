@@ -1,17 +1,17 @@
-<div class="toDoList">
+<div class="to-do-list-container">
   <h2>TO-DO</h2>
   <ng-content></ng-content>
-  <section class="example-section">
+  <section class="list-container-section">
     <mat-checkbox class="example-margin">Check me!</mat-checkbox>
     <mat-checkbox class="example-margin" [disabled]="true"
       >Disabled</mat-checkbox
     >
   </section>
 
-  <section class="example-section">
-    <span class="example-list-section">
+  <section class="to-do-list-section">
+    <span class="completion-section">
       <mat-checkbox
-        class="example-margin"
+        class="list-margin"
         [checked]="task().completed"
         [indeterminate]="partiallyComplete()"
         (change)="update($event.checked)"
@@ -19,7 +19,7 @@
         {{ task().name }}
       </mat-checkbox>
     </span>
-    <span class="example-list-section">
+    <span class="task-section">
       <ul>
         @for (subtask of task().subtasks; track subtask; let i = $index) {
         <li>

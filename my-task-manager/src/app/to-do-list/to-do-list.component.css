@@ -1,8 +1,8 @@
-.example-section {
+.to-do-list-section {
   margin: 12px 0;
 }
 
-.example-margin {
+.list-margin {
   margin: 0 12px;
 }
 
@@ -11,7 +11,7 @@ ul {
   margin-top: 4px;
 }
 
-.toDoList {
+.to-do-list-container {
   width: 90%;
   max-width: 800px;
   background: #fff;
