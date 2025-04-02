@@ -1,7 +1,7 @@
 <form>
   <div>
     <label for="taskName">Task Name:</label>
-    <input id="taskName" [(ngModel)]="task().name" name="name" required />
+    <input id="taskName" [(ngModel)]="newTask.name" name="name" required />
   </div>
   <div>
     <label for="taskDescription">Description:</label>
@@ -20,5 +20,5 @@
       name="dueDate"
     />
   </div>
-  <button type="submit">Save</button>
+  <button type="submit" (click)="addTask(newTask)">Save</button>
 </form>

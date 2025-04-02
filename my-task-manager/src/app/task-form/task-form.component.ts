@@ -1,16 +1,23 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Task, ToDoListComponent } from '../to-do-list/to-do-list.component';
+import { Task } from '../to-do-list/to-do-list.component';
 
 @Component({
   selector: 'app-task-form',
-  imports: [FormsModule, ToDoListComponent],
+  imports: [FormsModule],
   standalone: true,
   templateUrl: './task-form.component.html',
   styleUrl: './task-form.component.css',
 })
 export class TaskFormComponent {
-  addTask(task: Task) {
-    console.log('Task added:', task);
+  newTask: Task = {
+    name: '',
+    description: '',
+    dueDate: undefined,
+    completed: false,
+    subtasks: [],
+  };
+  addTask(newTask: Task) {
+    console.log('Task added:', newTask);
   }
 }
