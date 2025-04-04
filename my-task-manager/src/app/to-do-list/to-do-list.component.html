@@ -6,24 +6,24 @@
     <span class="task-section">
       <ul>
         <!-- TODO make sure that the task() below is set up as an array so it becomes iterable -->
-        @for (task of task(); track task; let i = $index) {
+        @for (task of tasks(); track task; let i = $index) {
         <li>
           <mat-checkbox
             class="list-margin"
-            [checked]="task().completed"
+            [checked]="task.completed"
             [indeterminate]="partiallyComplete()"
             (change)="update($event.checked)"
           >
-            {{ task().name }}
+            {{ task.name }}
           </mat-checkbox>
-          <button (click)="deleteTask(this.task)">Delete</button>
+          <button (click)="deleteTask(task)">Delete</button>
         </li>
         }
       </ul>
     </span>
     <span class="subtask-section">
       <ul>
-        @for (subtask of task().subtasks; track subtask; let i = $index) {
+        @for (subtask of tasks(); track subtask; let i = $index) {
         <li>
           <mat-checkbox
             [checked]="subtask.completed"

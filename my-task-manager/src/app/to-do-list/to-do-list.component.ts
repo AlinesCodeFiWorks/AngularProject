@@ -12,11 +12,7 @@ export interface Task {
   description?: string;
   dueDate?: Date;
   completed: boolean;
-  subtasks?: Task[];
-}
-export interface subTask {
   subtasks?: { name: string; completed: boolean }[];
-  //TODO: add subtasks to the task interface
 }
 
 @Component({
@@ -27,51 +23,53 @@ export interface subTask {
   styleUrl: './to-do-list.component.css',
 })
 export class ToDoListComponent {
-  readonly task = signal<Task>({
-    name: 'Parent task',
-    description: 'Parent task description',
-    dueDate: new Date(),
-    completed: false,
-    subtasks: [
-      { name: 'Child task 1', completed: false },
-      { name: 'Child task 2', completed: false },
-      { name: 'Child task 3', completed: false },
-    ],
-  });
+  readonly tasks = signal<Task[]>([
+    {
+      name: 'Parent task 1',
+      description: 'Parent task 1 description',
+      dueDate: new Date(),
+      completed: false,
+      subtasks: [
+        { name: 'Child task 1.1', completed: false },
+        { name: 'Child task 1.2', completed: false },
+      ],
+    },
+  ]);
 
   readonly partiallyComplete = computed(() => {
-    const task = this.task();
-    if (!task.subtasks) {
+    const task = this.tasks();
+    if (!task.every((t) => t.subtasks)) {
       return false;
     }
-    return (
-      task.subtasks.some((t) => t.completed) &&
-      !task.subtasks.every((t) => t.completed)
-    );
+    return task.some((t) => t.completed) && !task.every((t) => t.completed);
   });
 
   update(completed: boolean, index?: number) {
-    this.task.update((task) => {
+    this.tasks.update((task) => {
       if (index === undefined) {
-        task.completed = completed;
-        task.subtasks?.forEach((t) => (t.completed = completed));
+        task.forEach((t) => {
+          t.completed = completed;
+          t.subtasks?.forEach((subtask) => (subtask.completed = completed));
+        });
       } else {
-        task.subtasks![index].completed = completed;
-        task.completed = task.subtasks?.every((t) => t.completed) ?? true;
+        task[index].subtasks![index].completed = completed;
+        task[index].completed =
+          task[index].subtasks?.every((t) => t.completed) ?? true;
       }
       return { ...task };
     });
   }
-  deleteTask(task: Task) {
-    this.task.update((task) => {
-      task.subtasks = task.subtasks?.filter((t) => t !== task);
-      return { ...task };
+  deleteTask(taskToDelete: Task) {
+    this.tasks.update((tasks) => {
+      return tasks.filter((task) => task !== taskToDelete);
     });
   }
   deleteSubtask(subtask: Task) {
-    this.task.update((task) => {
-      task.subtasks = task.subtasks?.filter((t) => t !== subtask);
-      return { ...task };
+    this.tasks.update((tasks) => {
+      tasks.forEach((task) => {
+        task.subtasks = task.subtasks?.filter((t) => t !== subtask);
+      });
+      return tasks;
     });
   }
 }
