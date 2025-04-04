@@ -19,6 +19,7 @@ import { ShareToDoListComponent } from './share-to-do-list/share-to-do-list.comp
     UserFeedbackComponent,
     CommonModule,
   ],
+  standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
