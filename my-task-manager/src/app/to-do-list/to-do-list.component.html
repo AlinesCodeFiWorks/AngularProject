@@ -3,28 +3,28 @@
   <ng-content></ng-content>
   <section class="to-do-list-section">
     <span class="task-section">
-      <mat-checkbox
-        class="list-margin"
-        [checked]="task().completed"
-        [indeterminate]="partiallyComplete()"
-        (change)="update($event.checked)"
-      >
-        {{ task().name }}
-      </mat-checkbox>
-    </span>
-    <span class="task-section">
-      <ul>
-        @for (subtask of task().subtasks; track subtask; let i = $index) {
-        <li>
-          <mat-checkbox
-            [checked]="subtask.completed"
-            (change)="update($event.checked, i)"
-          >
-            {{ subtask.name }}
-          </mat-checkbox>
-        </li>
-        }
-      </ul>
+      @for (task of toDoList(); track task.name; let i = $index) {
+      <li>
+        <mat-checkbox
+          [checked]="task.completed"
+          [indeterminate]="partiallyComplete()"
+          (change)="update($event.checked)"
+        >
+          {{ task.name }}
+        </mat-checkbox>
+          @for (subtask of task.subtasks; track subtask; let i = $index) {
+          <li>
+            <mat-checkbox
+              [checked]="subtask.subCompleted"
+              (change)="update($event.checked, i)"
+              class="list-margin"
+            >
+              {{ subtask.subName }}
+            </mat-checkbox>
+          </li>
+          }@empty{"No subtasks available."}
+      </li>
+      }@empty{"No tasks available."}
     </span>
   </section>
 </div>

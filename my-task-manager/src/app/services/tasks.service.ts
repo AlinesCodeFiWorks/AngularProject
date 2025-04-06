@@ -3,6 +3,9 @@ import { Injectable, signal } from '@angular/core';
 export interface Task {
   name: string;
   description: string;
+  dueDate?: Date;
+  completed: boolean;
+  subtasks?: { subName: string; subCompleted: boolean }[];
 }
 
 @Injectable({
@@ -10,8 +13,20 @@ export interface Task {
 })
 export class TasksService {
   private tasks = signal<Task[]>([
-    { name: 'Task 1', description: 'Description 1' },
-    { name: 'Task 2', description: 'Description 2' },
+    {
+      name: 'Eample task 1',
+      description: 'Description 1',
+      dueDate: new Date(4 / 6 / 2025),
+      completed: false,
+      subtasks: [{ subName: 'Example subtask 1', subCompleted: false }],
+    },
+    {
+      name: 'Eample task 2',
+      description: 'Description 2',
+      dueDate: new Date(4 / 7 / 2025),
+      completed: false,
+      subtasks: [{ subName: 'Example subtask 2', subCompleted: false }],
+    },
   ]);
 
   getTasks() {

@@ -2,53 +2,47 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  inject,
   signal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-
-export interface Task {
-  name: string;
-  completed: boolean;
-  subtasks?: Task[];
-}
+import { Task, TasksService } from '../services/tasks.service';
+import { TaskFormComponent } from '../task-form/task-form.component';
 
 @Component({
   selector: 'app-to-do-list',
-  imports: [MatCheckboxModule, FormsModule],
+  imports: [MatCheckboxModule, FormsModule /*TaskFormComponent*/], //TODO add this component once readyS
   templateUrl: './to-do-list.component.html',
   styleUrl: './to-do-list.component.css',
 })
 export class ToDoListComponent {
-  readonly task = signal<Task>({
-    name: 'Parent task',
-    completed: false,
-    subtasks: [
-      { name: 'Child task 1', completed: false },
-      { name: 'Child task 2', completed: false },
-      { name: 'Child task 3', completed: false },
-    ],
-  });
+  private tasksService = inject(TasksService);
+  readonly toDoList = this.tasksService.getTasks();
 
   readonly partiallyComplete = computed(() => {
-    const task = this.task();
-    if (!task.subtasks) {
-      return false;
-    }
-    return (
-      task.subtasks.some((t) => t.completed) &&
-      !task.subtasks.every((t) => t.completed)
+    const tasks = this.toDoList();
+    return tasks.some(
+      (task) =>
+        task.subtasks?.some((t) => t.subCompleted) &&
+        !task.subtasks?.every((t) => t.subCompleted)
     );
   });
 
   update(completed: boolean, index?: number) {
-    this.task.update((task) => {
+    this.toDoList.update((task) => {
       if (index === undefined) {
-        task.completed = completed;
-        task.subtasks?.forEach((t) => (t.completed = completed));
+        task.forEach((t) => {
+          t.completed = completed;
+          t.subtasks?.forEach((subtask) => (subtask.subCompleted = completed));
+        });
       } else {
-        task.subtasks![index].completed = completed;
-        task.completed = task.subtasks?.every((t) => t.completed) ?? true;
+        task.forEach((t) => {
+          if (t.subtasks && index !== undefined) {
+            t.subtasks[index].subCompleted = completed;
+            t.completed = t.subtasks.every((subtask) => subtask.subCompleted);
+          }
+        });
       }
       return { ...task };
     });
