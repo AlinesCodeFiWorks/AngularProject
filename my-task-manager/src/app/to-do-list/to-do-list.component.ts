@@ -12,12 +12,12 @@ import { TaskFormComponent } from '../task-form/task-form.component';
 
 @Component({
   selector: 'app-to-do-list',
-  imports: [MatCheckboxModule, FormsModule /*TaskFormComponent*/], //TODO add this component once readyS
+  imports: [MatCheckboxModule, FormsModule /*TaskFormComponent*/], //TODO add this component once ready
   templateUrl: './to-do-list.component.html',
   styleUrl: './to-do-list.component.css',
 })
 export class ToDoListComponent {
-  private tasksService = inject(TasksService);
+  tasksService = inject(TasksService);
   readonly toDoList = this.tasksService.getTasks();
 
   readonly partiallyComplete = computed(() => {

@@ -1,15 +1,40 @@
-<form>
+<form (submit)="addTask()">
   <div>
-    <label for="taskName">Task Name:</label>
-    <input id="taskName" name="name" required />
+    <label for="taskName">Task:</label>
+    <input
+      id="taskName"
+      name="name"
+      [(ngModel)]="newTask.name"
+      placeholder="task name"
+      required
+    />
   </div>
   <div>
     <label for="taskDescription">Description:</label>
-    <textarea id="taskDescription" name="description"></textarea>
+    <textarea
+      id="taskDescription"
+      name="description"
+      [(ngModel)]="newTask.description"
+      placeholder="describe task"
+    ></textarea>
   </div>
   <div>
-    <label for="taskDueDate">Due Date:</label>
-    <input type="date" id="taskDueDate" name="dueDate" />
+    <label for="taskDueDate">Due on:</label>
+    <input
+      type="date"
+      id="taskDueDate"
+      name="dueDate"
+      [(ngModel)]="newTask.dueDate"
+    />
+  </div>
+  <div>
+    <label for="subtasks">Subtasks:</label>
+    <input
+      id="subtasks"
+      name="subtasks"
+      [(ngModel)]="newTask.subtasks"
+      placeholder="any subtasks?"
+    />
   </div>
   <button type="submit">Save</button>
 </form>
