@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, inject, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Task, TasksService } from '../shared/services/tasks.service';
+import { TasksService } from '../shared/services/tasks.service';
+import { Task } from '../shared/task.model';
 
 @Component({
   selector: 'app-task-form',
@@ -10,6 +11,9 @@ import { Task, TasksService } from '../shared/services/tasks.service';
 })
 export class TaskFormComponent {
   tasksService = inject(TasksService);
+
+  private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
+
   newTask: Task = {
     name: '',
     description: '',
@@ -23,13 +27,7 @@ export class TaskFormComponent {
     this.resetForm();
   }
   resetForm() {
-    this.newTask = {
-      name: '',
-      description: '',
-      dueDate: new Date(),
-      completed: false,
-      subtasks: [],
-      // TODO: not working lol
-    };
+    this.form().nativeElement.reset();
+    // TODO: not working lol
   }
 }
