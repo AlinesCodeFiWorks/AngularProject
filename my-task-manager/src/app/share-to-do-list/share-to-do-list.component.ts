@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { TasksService } from '../services/tasks.service';
+import { TasksService } from '../shared/services/tasks.service';
 
 @Component({
   selector: 'app-share-to-do-list',

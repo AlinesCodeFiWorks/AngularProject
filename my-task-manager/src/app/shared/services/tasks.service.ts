@@ -1,12 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-
-export interface Task {
-  name: string;
-  description: string;
-  dueDate?: Date;
-  completed: boolean;
-  subtasks?: { subName: string; subCompleted: boolean }[];
-}
+import { Task } from '../task.model';
 
 @Injectable({
   providedIn: 'root',

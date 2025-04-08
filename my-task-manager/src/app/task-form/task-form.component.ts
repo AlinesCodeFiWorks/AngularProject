@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Task, TasksService } from '../services/tasks.service';
+import { Task, TasksService } from '../shared/services/tasks.service';
 
 @Component({
   selector: 'app-task-form',

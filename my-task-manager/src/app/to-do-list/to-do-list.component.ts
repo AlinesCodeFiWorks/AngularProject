@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { Task, TasksService } from '../services/tasks.service';
+import { TasksService } from '../shared/services/tasks.service';
 import { TaskFormComponent } from '../task-form/task-form.component';
 
 @Component({
