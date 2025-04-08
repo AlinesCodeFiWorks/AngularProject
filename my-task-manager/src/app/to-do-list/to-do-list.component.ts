@@ -1,18 +1,11 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  signal,
-} from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TasksService } from '../shared/services/tasks.service';
-import { TaskFormComponent } from '../task-form/task-form.component';
 
 @Component({
   selector: 'app-to-do-list',
-  imports: [MatCheckboxModule, FormsModule /*TaskFormComponent*/], //TODO add this component once ready
+  imports: [MatCheckboxModule, FormsModule],
   templateUrl: './to-do-list.component.html',
   styleUrl: './to-do-list.component.css',
 })
