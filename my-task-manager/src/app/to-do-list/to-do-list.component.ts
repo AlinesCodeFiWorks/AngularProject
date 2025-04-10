@@ -6,6 +6,7 @@ import { TasksService } from '../shared/services/tasks.service';
 @Component({
   selector: 'app-to-do-list',
   imports: [MatCheckboxModule, FormsModule],
+  standalone: true,
   templateUrl: './to-do-list.component.html',
   styleUrl: './to-do-list.component.css',
 })
@@ -43,6 +44,19 @@ export class ToDoListComponent {
         });
       }
       return { ...task };
+    });
+  }
+  deleteTask(taskToDelete: Task) {
+    this.tasks.update((tasks) => {
+      return tasks.filter((task) => task !== taskToDelete);
+    });
+  }
+  deleteSubtask(subtask: Task) {
+    this.tasks.update((tasks) => {
+      tasks.forEach((task) => {
+        task.subtasks = task.subtasks?.filter((t) => t !== subtask);
+      });
+      return tasks;
     });
   }
 }

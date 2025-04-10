@@ -12,6 +12,7 @@ import { Task } from '../shared/task.model';
 @Component({
   selector: 'app-task-form',
   imports: [FormsModule],
+  standalone: true,
   templateUrl: './task-form.component.html',
   styleUrl: './task-form.component.css',
 })
