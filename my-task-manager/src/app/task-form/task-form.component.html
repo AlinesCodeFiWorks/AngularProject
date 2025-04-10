@@ -8,7 +8,10 @@
       placeholder="task name"
       required
     />
+    <button (click)="onToggleDetails()">➕</button>
   </div>
+
+  @if (showDetails()) {
   <div>
     <label for="taskDescription">Description:</label>
     <textarea
@@ -37,5 +40,6 @@
       placeholder="any subtasks?"
     />
   </div>
+  }
   <button type="submit">Save</button>
 </form>

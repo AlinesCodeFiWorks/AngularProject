@@ -20,7 +20,10 @@ export class TaskFormComponent {
 
   private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
 
-  showDetails = signal(false);
+  showDetails = this.tasksService.showDetails;
+  onToggleDetails() {
+    this.tasksService.onToggleDetails();
+  }
 
   newTask: Task = {
     name: '',
