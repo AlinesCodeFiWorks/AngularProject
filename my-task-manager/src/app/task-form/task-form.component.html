@@ -1,24 +1,45 @@
-<form>
+<form (submit)="addTask(); $event.preventDefault()" #form>
   <div>
-    <label for="taskName">Task Name:</label>
-    <input id="taskName" [(ngModel)]="newTask.name" name="name" required />
+    <label for="taskName">Task:</label>
+    <input
+      id="taskName"
+      name="name"
+      [(ngModel)]="newTask.name"
+      placeholder="task name"
+      required
+    />
+    <button (click)="onToggleDetails()">➕</button>
   </div>
+
+  @if (showDetails()) {
   <div>
     <label for="taskDescription">Description:</label>
     <textarea
       id="taskDescription"
-      [(ngModel)]="newTask.description"
       name="description"
+      [(ngModel)]="newTask.description"
+      placeholder="describe task"
+      rows="3"
     ></textarea>
   </div>
   <div>
-    <label for="taskDueDate">Due Date:</label>
+    <label for="taskDueDate">Due on:</label>
     <input
       type="date"
       id="taskDueDate"
-      [(ngModel)]="newTask.dueDate"
       name="dueDate"
+      [(ngModel)]="newTask.dueDate"
     />
   </div>
-  <button type="submit" (click)="addTask(newTask)">Save</button>
+  <div>
+    <label for="subtasks">Subtasks:</label>
+    <input
+      id="subtasks"
+      name="subtasks"
+      [(ngModel)]="newTask.subtasks"
+      placeholder="any subtasks?"
+    />
+  </div>
+  }
+  <button type="submit">Save</button>
 </form>
