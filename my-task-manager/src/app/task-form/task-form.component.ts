@@ -1,4 +1,10 @@
-import { Component, ElementRef, inject, viewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  inject,
+  viewChild,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TasksService } from '../shared/services/tasks.service';
 import { Task } from '../shared/task.model';
@@ -14,6 +20,8 @@ export class TaskFormComponent {
 
   private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
 
+  showDetails = signal(false);
+
   newTask: Task = {
     name: '',
     description: '',
@@ -28,6 +36,5 @@ export class TaskFormComponent {
   }
   resetForm() {
     this.form().nativeElement.reset();
-    // TODO: not working lol
   }
 }

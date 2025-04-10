@@ -12,9 +12,10 @@ import { TasksService } from '../shared/services/tasks.service';
 export class ToDoListComponent {
   tasksService = inject(TasksService);
   readonly toDoList = this.tasksService.getTasks();
-  showDetails = signal(false);
+
+  showDetails = this.tasksService.showDetails;
   onToggleDetails() {
-    this.showDetails.set(!this.showDetails());
+    this.tasksService.onToggleDetails();
   }
 
   readonly partiallyComplete = computed(() => {
