@@ -19,7 +19,7 @@
         @if (showDetails()) {
           <div>{{task.description}}</div>
           }
-          @for (subtask of task.subtasks; track subtask; let i = $index) {
+          @for (subtask of task.subtasks; track subtask.subName; let i = $index) {
           <li>
             <mat-checkbox
               [checked]="subtask.subCompleted"

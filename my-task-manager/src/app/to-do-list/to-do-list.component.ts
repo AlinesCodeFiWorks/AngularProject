@@ -2,6 +2,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TasksService } from '../shared/services/tasks.service';
+import { Task } from '../shared/task.model';
 
 @Component({
   selector: 'app-to-do-list',
@@ -47,14 +48,14 @@ export class ToDoListComponent {
     });
   }
   deleteTask(taskToDelete: Task) {
-    this.tasks.update((tasks) => {
+    this.toDoList.update((tasks) => {
       return tasks.filter((task) => task !== taskToDelete);
     });
   }
-  deleteSubtask(subtask: Task) {
-    this.tasks.update((tasks) => {
+  deleteSubtask(subName: string) {
+    this.toDoList.update((tasks) => {
       tasks.forEach((task) => {
-        task.subtasks = task.subtasks?.filter((t) => t !== subtask);
+        task.subtasks = task.subtasks?.filter((t) => t.subName !== subName);
       });
       return tasks;
     });
