@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TasksService } from '../shared/services/tasks.service';
@@ -12,6 +12,10 @@ import { TasksService } from '../shared/services/tasks.service';
 export class ToDoListComponent {
   tasksService = inject(TasksService);
   readonly toDoList = this.tasksService.getTasks();
+  showDetails = signal(false);
+  onToggleDetails() {
+    this.showDetails.set(!this.showDetails());
+  }
 
   readonly partiallyComplete = computed(() => {
     const tasks = this.toDoList();
