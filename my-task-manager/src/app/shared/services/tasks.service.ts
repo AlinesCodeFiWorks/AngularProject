@@ -28,12 +28,6 @@ export class TasksService {
     },
   ]);
 
-  showDetails = signal(false);
-
-  onToggleDetails() {
-    this.showDetails.set(!this.showDetails());
-  }
-
   getTasks() {
     return this.tasks;
   }

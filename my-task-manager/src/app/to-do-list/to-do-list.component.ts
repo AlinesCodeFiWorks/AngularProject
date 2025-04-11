@@ -15,9 +15,10 @@ export class ToDoListComponent {
   tasksService = inject(TasksService);
   readonly toDoList = this.tasksService.getTasks();
 
-  showDetails = this.tasksService.showDetails;
+  showTaskDetails = signal(false);
+  //TODO find a wat to mode onToggleDetails() to tasks.service.js
   onToggleDetails() {
-    this.tasksService.onToggleDetails();
+    this.showTaskDetails.set(!this.showTaskDetails());
   }
 
   readonly partiallyComplete = computed(() => {

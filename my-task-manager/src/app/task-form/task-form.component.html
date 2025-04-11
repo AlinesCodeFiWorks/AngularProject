@@ -8,10 +8,9 @@
       placeholder="task name"
       required
     />
-    <button (click)="onToggleDetails()">➕</button>
+    <button type="button" (click)="onToggleDetails()">➕</button>
   </div>
-
-  @if (showDetails()) {
+  @if (showFormDetails()) {
   <div>
     <label for="taskDescription">Description:</label>
     <textarea

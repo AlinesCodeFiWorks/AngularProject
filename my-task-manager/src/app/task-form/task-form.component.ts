@@ -21,9 +21,10 @@ export class TaskFormComponent {
 
   private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
 
-  showDetails = this.tasksService.showDetails;
+  showFormDetails = signal(false);
+  //TODO find a wat to mode onToggleDetails() to tasks.service.js
   onToggleDetails() {
-    this.tasksService.onToggleDetails();
+    this.showFormDetails.set(!this.showFormDetails());
   }
 
   newTask: Task = {
