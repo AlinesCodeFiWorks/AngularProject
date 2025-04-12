@@ -34,8 +34,10 @@ export class TasksService {
   addTask(newTask: Task) {
     this.tasks.update((tasks) => [...tasks, newTask]);
   }
-  deleteTask() {
-    this.tasks.update((tasks) => tasks.filter((task) => task !== task));
+  deleteTask(task: Task) {
+    this.tasks.update((tasks) =>
+      tasks.filter((currentTask) => currentTask !== task)
+    );
   }
   deleteSubtask() {
     this.tasks.update((tasks) => tasks.filter((task) => task !== task)); //TODO fix this

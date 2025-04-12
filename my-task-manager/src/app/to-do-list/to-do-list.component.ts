@@ -17,7 +17,7 @@ export class ToDoListComponent {
 
   showTaskDetails = signal(false);
   //TODO find a wat to mode onToggleDetails() to tasks.service.js
-  onToggleDetails() {
+  onToggleDetails(task: Task) {
     this.showTaskDetails.set(!this.showTaskDetails());
   }
 

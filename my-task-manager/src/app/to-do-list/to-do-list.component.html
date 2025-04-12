@@ -13,8 +13,8 @@
           (change)="update($event.checked,i)"
         >
           {{ task.name }}
-          <button (click)="onToggleDetails()">🔻</button>
-          <button (click)="tasksService.deleteTask()">🗑️</button>
+          <button (click)="onToggleDetails(task)">🔻</button>
+          <button (click)="tasksService.deleteTask(task)">🗑️</button>
         </mat-checkbox>
         @if (showTaskDetails()) {
           <div>{{task.description}}</div>
