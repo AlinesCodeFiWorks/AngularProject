@@ -6,7 +6,14 @@
   />
 </button>
 <!-- TODO make it so that the form below is displayed as a pop-up when the email button is clicked -->
-<!-- <form (submit)="tasksService.shareToDoList()">
-  <label for="email">Email address:</label>
-  <input type="email" name="email" required /> <button>Send</button>
-</form> -->
+<form [(submit)="emailMessage()" ]>
+  <label for="emailAddress">Email address:</label>
+  <input
+    type="emailAddress"
+    name="emailAddress"
+    id="emailAddress"
+    required
+    [ngModel]="emailAddress"
+  />
+  <button type="submit">Send</button>
+</form>

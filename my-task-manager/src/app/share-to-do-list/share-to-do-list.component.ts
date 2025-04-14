@@ -11,5 +11,26 @@ import { TasksService } from '../shared/services/tasks.service';
 })
 export class ShareToDoListComponent {
   tasksService = inject(TasksService);
-  shareLink: string = '';
+
+  emailAddress: string = '';
+
+  //TODO Move the fumctions below to the service once properly working
+
+  getEmailAddress() {
+    return this.emailAddress;
+  }
+
+  emailMessage() {
+    // this.getEmailAddress();
+    // if (this.emailAddress) {
+    // this.shareLink = `mailto:${this.emailAddress}?subject=To-Do List&body=${this.tasksService.getTasks()}`;
+    this.getEmailAddress();
+    console.log(
+      `mailto:${this.emailAddress} To-do: ${this.tasksService.getTasks()}`
+    );
+    // }
+  }
+  ngOnSubmit() {
+    this.emailMessage();
+  }
 }

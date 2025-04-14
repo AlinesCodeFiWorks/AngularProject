@@ -16,7 +16,7 @@ export class ToDoListComponent {
   readonly toDoList = this.tasksService.getTasks();
 
   showTaskDetails = signal(false);
-  //TODO find a wat to mode onToggleDetails() to tasks.service.js
+  //TODO find a way to move onToggleDetails() to tasks.service.js
   onToggleDetails(task: Task) {
     this.showTaskDetails.set(!this.showTaskDetails());
   }
