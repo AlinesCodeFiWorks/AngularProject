@@ -6,7 +6,7 @@
   />
 </button>
 <!-- TODO make it so that the form below is displayed as a pop-up when the email button is clicked -->
-<form [(submit)="emailMessage()" ]>
+<form (submit)="emailMessage()">
   <label for="emailAddress">Email address:</label>
   <input
     type="emailAddress"
