@@ -4,7 +4,7 @@
   <ng-content select="app-task-form"></ng-content>
   <section class="to-do-list-section">
     <span class="task-section">
-      @for (task of toDoList(); track task.name; let i = $index) {
+      @for (task of tasksService.tasks(); track task.name; let i = $index) {
       <li>
         <!-- TODO Make nested task completion work again -->
         <mat-checkbox

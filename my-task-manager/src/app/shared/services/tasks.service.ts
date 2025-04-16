@@ -5,7 +5,7 @@ import { Task } from '../task.model';
   providedIn: 'root',
 })
 export class TasksService {
-  private tasks = signal<Task[]>([
+  tasks = signal<Task[]>([
     {
       name: 'Eample task 1',
       description: 'Description 1',
@@ -32,7 +32,7 @@ export class TasksService {
     return this.tasks;
   }
   addTask(newTask: Task) {
-    this.tasks.update((tasks) => [...tasks, newTask]);
+    this.tasks.update((tasks) => [...tasks, { ...newTask }]);
   }
   deleteTask(task: Task) {
     this.tasks.update((tasks) =>
