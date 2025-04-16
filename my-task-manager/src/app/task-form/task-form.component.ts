@@ -36,10 +36,19 @@ export class TaskFormComponent {
   };
 
   addTask() {
+    console.log('Submitted task:', this.newTask);
     this.tasksService.addTask(this.newTask);
     this.resetForm();
   }
   resetForm() {
     this.form().nativeElement.reset();
+
+    this.newTask = {
+      name: '',
+      description: '',
+      dueDate: new Date(),
+      completed: false,
+      subtasks: [],
+    };
   }
 }

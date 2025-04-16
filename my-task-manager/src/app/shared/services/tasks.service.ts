@@ -47,7 +47,7 @@ export class TasksService {
   }
   shareToDoList() {
     // TODO develop this feature
-    const tasksJson = JSON.stringify(this.tasks);
+    const tasksJson = JSON.stringify(this.tasks());
     const encodedTasks = encodeURIComponent(tasksJson);
     const shareLink = `${window.location.origin}/shared-tasks?data=${encodedTasks}`;
   }
