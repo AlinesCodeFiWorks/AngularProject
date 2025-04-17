@@ -6,18 +6,19 @@
     <span class="task-section">
       @for (task of tasksService.tasks(); track i; let i = $index) {
       <li>
-        <!-- TODO Make nested task completion work again -->
+        <!-- TODO Add option to hide subtasks in addition to expanding individual task details -->
         <mat-checkbox
           [checked]="task.completed"
           [indeterminate]="isPartiallyComplete(task)"
           (change)="markTaskComplete(i, $event.checked)"
         >
           {{ task.name }}
-          <button (click)="onToggleDetails(task)">🔻</button>
+          <button (click)="toggleTaskDetails(task)">🔻</button>
           <button (click)="tasksService.deleteTask(task)">🗑️</button>
         </mat-checkbox>
-        @if (showTaskDetails()) {
+        @if (isTaskExpanded(task)) {
           <div>{{task.description}}</div>
+          <!-- TODO Now that this works properly, add due date to the display -->
           }
           @for (subtask of task.subtasks; track j; let j = $index) {
           <li>
@@ -26,7 +27,8 @@
               (change)="markSubtaskComplete(i, j, $event.checked)"
               class="list-margin"
             >
-              {{ subtask.subName }}  <button (click)="deleteSubtask(subtask.subName)">🗑️</button>
+              {{ subtask.subName }}  <button (click)="tasksService.deleteSubtask(task.name, subtask.subName)">🗑️</button>
+
             </mat-checkbox>
           </li>
           }@empty{No subtasks available.}
@@ -35,4 +37,3 @@
     </span>
   </section>
 </div>
-<!-- TODO Make it so that completed tasks are displayed crossed out -->

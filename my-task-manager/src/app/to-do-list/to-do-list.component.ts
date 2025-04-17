@@ -15,10 +15,15 @@ export class ToDoListComponent {
   tasksService = inject(TasksService);
   readonly toDoList = this.tasksService.getTasks();
 
-  showTaskDetails = signal(false);
-  //TODO find a way to move onToggleDetails() to tasks.service.js
-  onToggleDetails(task: Task) {
-    this.showTaskDetails.set(!this.showTaskDetails());
+  taskDetailsVisibility = new Map<string, boolean>();
+
+  isTaskExpanded(task: Task): boolean {
+    return this.taskDetailsVisibility.get(task.name) ?? false;
+  }
+
+  toggleTaskDetails(task: Task) {
+    const current = this.taskDetailsVisibility.get(task.name) ?? false;
+    this.taskDetailsVisibility.set(task.name, !current);
   }
 
   readonly partiallyComplete = computed(() => {
@@ -60,7 +65,7 @@ export class ToDoListComponent {
       return [...tasks];
     });
   }
-
+  //TODO why is the deleteTask function not referencing the existing one in the service? Look into this and clean it up.
   deleteTask(taskToDelete: Task) {
     this.toDoList.update((tasks) => {
       return tasks.filter((task) => task !== taskToDelete);

@@ -39,9 +39,20 @@ export class TasksService {
       tasks.filter((currentTask) => currentTask !== task)
     );
   }
-  deleteSubtask() {
-    this.tasks.update((tasks) => tasks.filter((task) => task !== task)); //TODO fix this
+
+  deleteSubtask(taskName: string, subName: string) {
+    this.tasks.update((tasks) => {
+      return tasks.map((task) => {
+        if (task.name === taskName) {
+          task.subtasks = task.subtasks?.filter(
+            (subtask) => subtask.subName !== subName
+          );
+        }
+        return task;
+      });
+    });
   }
+
   updateTask(updatedTask: Task) {
     //TODO update task
   }
