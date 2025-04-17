@@ -30,24 +30,30 @@ export class ToDoListComponent {
     );
   });
 
-  update(completed: boolean, index?: number) {
-    this.toDoList.update((task) => {
-      if (index === undefined) {
-        task.forEach((t) => {
-          t.completed = completed;
-          t.subtasks?.forEach((subtask) => (subtask.subCompleted = completed));
-        });
-      } else {
-        task.forEach((t) => {
-          if (t.subtasks && index !== undefined) {
-            t.subtasks[index].subCompleted = completed;
-            t.completed = t.subtasks.every((subtask) => subtask.subCompleted);
-          }
-        });
-      }
-      return { ...task };
+  markTaskComplete(taskIndex: number, completed: boolean) {
+    this.toDoList.update((tasks) => {
+      const task = tasks[taskIndex];
+      task.completed = completed;
+      task.subtasks?.forEach((sub) => (sub.subCompleted = completed));
+      return [...tasks];
     });
   }
+
+  markSubtaskComplete(
+    taskIndex: number,
+    subtaskIndex: number,
+    completed: boolean
+  ) {
+    this.toDoList.update((tasks) => {
+      const task = tasks[taskIndex];
+      if (!task.subtasks) return tasks;
+
+      task.subtasks[subtaskIndex].subCompleted = completed;
+      task.completed = task.subtasks.every((sub) => sub.subCompleted);
+      return [...tasks];
+    });
+  }
+
   deleteTask(taskToDelete: Task) {
     this.toDoList.update((tasks) => {
       return tasks.filter((task) => task !== taskToDelete);
