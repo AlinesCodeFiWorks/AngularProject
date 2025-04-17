@@ -4,29 +4,31 @@
   <ng-content select="app-task-form"></ng-content>
   <section class="to-do-list-section">
     <span class="task-section">
-      @for (task of tasksService.tasks(); track task.name; let i = $index) {
+      @for (task of tasksService.tasks(); track i; let i = $index) {
       <li>
-        <!-- TODO Make nested task completion work again -->
+        <!-- TODO Add option to hide subtasks in addition to expanding individual task details -->
         <mat-checkbox
           [checked]="task.completed"
-          [indeterminate]="partiallyComplete()"
-          (change)="update($event.checked,i)"
+          [indeterminate]="isPartiallyComplete(task)"
+          (change)="markTaskComplete(i, $event.checked)"
         >
           {{ task.name }}
-          <button (click)="onToggleDetails(task)">🔻</button>
+          <button (click)="toggleTaskDetails(task)">🔻</button>
           <button (click)="tasksService.deleteTask(task)">🗑️</button>
         </mat-checkbox>
-        @if (showTaskDetails()) {
+        @if (isTaskExpanded(task)) {
           <div>{{task.description}}</div>
+          <!-- TODO Now that this works properly, add due date to the display -->
           }
-          @for (subtask of task.subtasks; track i; let i = $index) {
+          @for (subtask of task.subtasks; track j; let j = $index) {
           <li>
             <mat-checkbox
               [checked]="subtask.subCompleted"
-              (change)="update($event.checked, i)"
+              (change)="markSubtaskComplete(i, j, $event.checked)"
               class="list-margin"
             >
-              {{ subtask.subName }}  <button (click)="tasksService.deleteSubtask()">🗑️</button>
+              {{ subtask.subName }}  <button (click)="tasksService.deleteSubtask(task.name, subtask.subName)">🗑️</button>
+
             </mat-checkbox>
           </li>
           }@empty{No subtasks available.}
@@ -35,4 +37,3 @@
     </span>
   </section>
 </div>
-<!-- TODO Make it so that completed tasks are displayed crossed out -->
