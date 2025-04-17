@@ -9,7 +9,7 @@
         <!-- TODO Make nested task completion work again -->
         <mat-checkbox
           [checked]="task.completed"
-          [indeterminate]="partiallyComplete()"
+          [indeterminate]="isPartiallyComplete(task)"
           (change)="markTaskComplete(i, $event.checked)"
         >
           {{ task.name }}

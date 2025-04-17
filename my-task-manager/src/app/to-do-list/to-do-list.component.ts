@@ -30,6 +30,13 @@ export class ToDoListComponent {
     );
   });
 
+  isPartiallyComplete(task: Task): boolean | undefined {
+    return (
+      task.subtasks?.some((s) => s.subCompleted) &&
+      !task.subtasks?.every((s) => s.subCompleted)
+    );
+  }
+
   markTaskComplete(taskIndex: number, completed: boolean) {
     this.toDoList.update((tasks) => {
       const task = tasks[taskIndex];
