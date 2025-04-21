@@ -1,7 +1,14 @@
-.header {
-  text-align: center;
-  font-size: 1.8rem;
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #f8f5ff; /* Soft lavender background */
+  padding: 10px;
+  text-align: start;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-weight: 600;
   color: #6a5acd;
   margin-bottom: 20px;
+  z-index: 1000;
 }

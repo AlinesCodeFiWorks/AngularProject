@@ -3,10 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TasksService } from '../shared/services/tasks.service';
 import { Task } from '../shared/task.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-to-do-list',
-  imports: [MatCheckboxModule, FormsModule],
+  imports: [CommonModule, MatCheckboxModule, FormsModule],
   standalone: true,
   templateUrl: './to-do-list.component.html',
   styleUrl: './to-do-list.component.css',
@@ -65,18 +66,69 @@ export class ToDoListComponent {
       return [...tasks];
     });
   }
-  //TODO why is the deleteTask function not referencing the existing one in the service? Look into this and clean it up.
-  deleteTask(taskToDelete: Task) {
-    this.toDoList.update((tasks) => {
-      return tasks.filter((task) => task !== taskToDelete);
+  // More troubleshooting notes: tracking which task is currently getting a new subtask
+  addingSubtaskTo = signal<string | null>(null);
+  newSubtaskName = '';
+
+  startAddingSubtask(task: Task) {
+    this.addingSubtaskTo.set(task.name);
+  }
+  cancelSubtaskInput() {
+    this.addingSubtaskTo.set(null);
+    this.newSubtaskName = '';
+  }
+
+  submitSubtask(task: Task) {
+    const name = this.newSubtaskName.trim();
+    if (!name) return;
+
+    this.tasksService.addSubtaskToTask(task.name, name);
+    this.addingSubtaskTo.set(null);
+    this.newSubtaskName = '';
+  }
+
+  // trackin which task is being edited
+  editingTaskName = signal<string | null>(null);
+
+  startEditingTask(task: Task) {
+    this.editingTaskName.set(task.name);
+  }
+
+  stopEditingTask(task: Task, newName: string) {
+    const trimmed = newName.trim();
+    if (!trimmed || trimmed === task.name) {
+      this.editingTaskName.set(null);
+      return;
+    }
+
+    this.tasksService.updateTaskName(task.name, trimmed);
+
+    this.editingTaskName.set(null);
+  }
+  editingSubtaskKey = signal<{ taskName: string; subName: string } | null>(
+    null
+  );
+
+  startEditingSubtask(task: Task, subtask: { subName: string }) {
+    this.editingSubtaskKey.set({
+      taskName: task.name,
+      subName: subtask.subName,
     });
   }
-  deleteSubtask(subName: string) {
-    this.toDoList.update((tasks) => {
-      tasks.forEach((task) => {
-        task.subtasks = task.subtasks?.filter((t) => t.subName !== subName);
-      });
-      return tasks;
-    });
+
+  stopEditingSubtask(task: Task, oldSubName: string, newSubName: string) {
+    const trimmed = newSubName.trim();
+    if (!trimmed || trimmed === oldSubName) {
+      this.editingSubtaskKey.set(null);
+      return;
+    }
+
+    this.tasksService.updateSubtaskName(task.name, oldSubName, trimmed);
+    this.editingSubtaskKey.set(null);
+  }
+
+  isEditingSubtask(task: Task, subName: string) {
+    const key = this.editingSubtaskKey();
+    return key?.taskName === task.name && key?.subName === subName;
   }
 }

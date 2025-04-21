@@ -52,8 +52,9 @@ Project Overview: Briefly explain the concept (e.g., a music playlist).
 CRUD Demonstration: Show how to perform Create, Read, Update, and Delete.
 Optional: Add screenshots or a short video link demonstrating the app.
 
-Reflection / Documentation:
+//TODO Reflection / Documentation:
 Summarize any challenges you encountered and how you solved them.
 Mention any notable features or design decisions.
-
-Good luck on your Angular 19 CRUD application!
+//Main focus was to create a clean and basic application with advanced features (or as advanced as I could make them lol)
+//1. Problem: restructuring subtasks format and input: initially part of the task submission form but form only took a string and the intention was to acommodate multiple subtasks per tasks (as set in the interface) as an array. Solution: had the input dynamically displayed under and bound to each task. Instead of parsing inputs and separating them by commas, this allowed for multiple input boxes while keeping the UI clean!
+//Next steps: 1. add task and subtask IDs for more accurate input handling

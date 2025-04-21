@@ -5,21 +5,55 @@
   <section class="to-do-list-section">
     <span class="task-section">
       @for (task of tasksService.tasks(); track i; let i = $index) {
-      <li>
+      <li [class.overdue]="tasksService.isTaskOverdue(task)">
         <!-- TODO Add option to hide subtasks in addition to expanding individual task details -->
         <mat-checkbox
           [checked]="task.completed"
           [indeterminate]="isPartiallyComplete(task)"
-          (change)="markTaskComplete(i, $event.checked)"
-        >
-          {{ task.name }}
-          <button (click)="toggleTaskDetails(task)">🔻</button>
-          <button (click)="tasksService.deleteTask(task)">🗑️</button>
+          (change)="markTaskComplete(i, $event.checked)">
+          <button
+          class="add-subtask-button"
+          (click)="startAddingSubtask(task)"
+          title="Add subtask">
+          ➕</button>
+
+          <!-- This was really confusing -->
+          @if (editingTaskName() !== task.name){
+          <span (click)="startEditingTask(task)">
+            {{ task.name }}
+          </span>}
+          @if (editingTaskName() === task.name){
+            <input
+            #taskInput
+            [value]="task.name"
+            (blur)="stopEditingTask(task, taskInput.value)"
+            (keydown.enter)="stopEditingTask(task, taskInput.value)"
+            class="inline-edit"
+          />
+          }
+
+          <button class="task-details-button" (click)="toggleTaskDetails(task)">🔻</button>
+          <button class="delete-task-button" (click)="tasksService.deleteTask(task)">🗑️</button>
         </mat-checkbox>
         @if (isTaskExpanded(task)) {
-          <div>{{task.description}}</div>
-          <!-- TODO Now that this works properly, add due date to the display -->
+          <div class="task-date">
+            @if (tasksService.isTaskOverdue(task))
+            {<span>🔥 Overdue! — </span>}
+            Due: {{ task.dueDate | date:'MMM d, y' }}</div>
+            <div class="task-description">{{task.description}}</div>
           }
+          @if (addingSubtaskTo() === task.name)
+          {<div>
+            <input
+            [(ngModel)]="newSubtaskName"
+            (blur)="submitSubtask(task)"
+            (keydown.enter)="submitSubtask(task)"
+            (keydown.escape)="cancelSubtaskInput()"
+            placeholder="Enter subtask name"
+            class="subtask-input"
+            autofocus/>
+          </div>}
+
           @for (subtask of task.subtasks; track j; let j = $index) {
           <li>
             <mat-checkbox
@@ -27,7 +61,23 @@
               (change)="markSubtaskComplete(i, j, $event.checked)"
               class="list-margin"
             >
-              {{ subtask.subName }}  <button (click)="tasksService.deleteSubtask(task.name, subtask.subName)">🗑️</button>
+
+            @if (!isEditingSubtask(task, subtask.subName)) {
+              <span (click)="startEditingSubtask(task, subtask)">
+                {{ subtask.subName }}
+              </span>
+            }
+            @if (isEditingSubtask(task, subtask.subName)) {
+              <input
+                #subtaskInput
+                [value]="subtask.subName"
+                (blur)="stopEditingSubtask(task, subtask.subName, subtaskInput.value)"
+                (keydown.enter)="stopEditingSubtask(task, subtask.subName, subtaskInput.value)"
+                class="inline-edit"
+              />
+            }
+
+              <button class="delete-subtask-button" (click)="tasksService.deleteSubtask(task.name, subtask.subName)">🗑️</button>
 
             </mat-checkbox>
           </li>
