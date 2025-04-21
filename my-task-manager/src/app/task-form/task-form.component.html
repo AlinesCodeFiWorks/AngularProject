@@ -1,6 +1,6 @@
 <form (submit)="addTask()" #form>
-  <div>
-    <label for="taskName">Task:</label>
+  <div class="new-task-header">
+    <label for="taskName">New task:</label>
     <input
       id="taskName"
       name="name"
@@ -8,7 +8,7 @@
       placeholder="task name"
       required
     />
-    <button type="button" (click)="tasksService.onToggleDetails()">➕</button>
+    <button type="button" (click)="tasksService.onToggleDetails()">✏️</button>
   </div>
   @if (tasksService.showFormDetails()) {
   <div>
