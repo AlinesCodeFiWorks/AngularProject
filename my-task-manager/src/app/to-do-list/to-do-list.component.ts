@@ -141,4 +141,7 @@ export class ToDoListComponent {
     const key = this.editingSubtaskKey();
     return key?.taskName === task.name && key?.subName === subName;
   }
+    // ngAfterViewChecked() {
+  //   const container = document.querySelector('mat-checkbox'); if(container){container.style.color = "black";
+  // }}
 }
