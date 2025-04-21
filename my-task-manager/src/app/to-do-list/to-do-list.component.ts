@@ -3,10 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TasksService } from '../shared/services/tasks.service';
 import { Task } from '../shared/task.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-to-do-list',
-  imports: [MatCheckboxModule, FormsModule],
+  imports: [CommonModule, MatCheckboxModule, FormsModule],
   standalone: true,
   templateUrl: './to-do-list.component.html',
   styleUrl: './to-do-list.component.css',

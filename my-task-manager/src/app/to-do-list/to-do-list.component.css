@@ -20,4 +20,12 @@ ul {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+.task-date,
+.task-description {
+  font-size: 0.85rem;
+  color: #888;
+  font-style: italic;
+  margin-top: 4px;
+}
+
 /* TODO Add toggling animation? */

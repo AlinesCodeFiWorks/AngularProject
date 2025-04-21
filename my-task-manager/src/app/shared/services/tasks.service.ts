@@ -9,7 +9,7 @@ export class TasksService {
     {
       name: 'Eample task 1',
       description: 'Description 1',
-      dueDate: new Date(4 / 6 / 2025),
+      dueDate: new Date('2025-04-06'),
       completed: false,
       subtasks: [
         { subName: 'Example subtask 1', subCompleted: false },
@@ -19,7 +19,7 @@ export class TasksService {
     {
       name: 'Eample task 2',
       description: 'Description 2',
-      dueDate: new Date(4 / 7 / 2025),
+      dueDate: new Date('2025-04-06'),
       completed: false,
       subtasks: [
         { subName: 'Example subtask 1', subCompleted: false },

@@ -52,7 +52,7 @@ Project Overview: Briefly explain the concept (e.g., a music playlist).
 CRUD Demonstration: Show how to perform Create, Read, Update, and Delete.
 Optional: Add screenshots or a short video link demonstrating the app.
 
-Reflection / Documentation:
+//TODO Reflection / Documentation:
 Summarize any challenges you encountered and how you solved them.
 Mention any notable features or design decisions.
 
