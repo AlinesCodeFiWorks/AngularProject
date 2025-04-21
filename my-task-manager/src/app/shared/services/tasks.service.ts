@@ -7,23 +7,13 @@ import { Task } from '../task.model';
 export class TasksService {
   tasks = signal<Task[]>([
     {
-      name: 'Eample task 1',
-      description: 'Description 1',
+      name: 'Sample task',
+      description: 'SAmple description',
       dueDate: new Date('2025-04-06'),
       completed: false,
       subtasks: [
-        { subName: 'Example subtask 1', subCompleted: false },
-        { subName: 'Example subtask 2', subCompleted: false },
-      ],
-    },
-    {
-      name: 'Example task 2',
-      description: 'Description 2',
-      dueDate: new Date('2025-04-06'),
-      completed: false,
-      subtasks: [
-        { subName: 'Example subtask 1', subCompleted: false },
-        { subName: 'Example subtask 2', subCompleted: false },
+        { subName: 'Sample subtask 1', subCompleted: false },
+        { subName: 'Sample subtask 2', subCompleted: false },
       ],
     },
   ]);
