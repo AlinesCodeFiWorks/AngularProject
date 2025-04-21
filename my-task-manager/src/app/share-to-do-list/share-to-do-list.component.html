@@ -1,19 +1,14 @@
-<button>
-  <img
-    src="https://static-00.iconduck.com/assets.00/email-icon-256x203-zt992cix.png"
-    alt="Email to-do list"
-    width="25px"
-  />
-</button>
-<!-- TODO make it so that the form below is displayed as a pop-up when the email button is clicked -->
-<form (submit)="emailMessage()">
+<form (submit)="emailMessage(); $event.preventDefault()">
   <label for="emailAddress">Email address:</label>
   <input
-    type="emailAddress"
+    type="email"
     name="emailAddress"
     id="emailAddress"
     required
-    [ngModel]="emailAddress"
+    placeholder="Enter your email address"
+    [ngModel]="feedbackService.emailAddress()"
+    (ngModelChange)="feedbackService.emailAddress.set($event)"
   />
+  <!--established two-way data binding with ngModel then an event listener to handle the result of said interaction (signal update)-->
   <button type="submit">Send</button>
 </form>

@@ -12,15 +12,47 @@ ul {
 }
 
 .to-do-list-container {
-  width: 90%;
-  max-width: 800px;
-  max-height: 100vh;
+  width: clamp(600px, 80%, 1200px);
+  max-width: 1100px;
+  max-height: none;
+  min-width: 600px;
   background: #fff;
-  padding: 20px;
+  margin: 40px auto;
+  padding: 24px;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
+  overflow-y: visible;
   box-sizing: border-box;
+}
+
+.to-do-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.to-do-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.to-do-header button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.task-section > li {
+  padding: 10px 12px;
+  border-bottom: 1px solid #eee;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+mat-checkbox {
+  font-size: 1rem;
 }
 
 .inline-edit {
@@ -65,9 +97,9 @@ li:hover .delete-subtask-button {
   font-style: italic;
   margin-top: 4px;
 }
+
 /* omg this turned out so dramatic - I love it lol */
 .task-date.overdue {
-  background-color: #ffe5e5;
   border-left: 4px solid #ff5e5e;
   color: #d40000;
   font-weight: bold;
@@ -82,17 +114,14 @@ li:hover .delete-subtask-button {
 .task-date.overdue:hover {
   transform: scale(1.05) rotate(-1deg);
   box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-  background-color: #ffdada;
   cursor: pointer;
 }
 
 li.overdue {
-  background-color: #ffe5e5; /* soft but dramatic pink */
   border-left: 6px solid #ff5e5e;
   padding: 12px;
   border-radius: 8px;
   margin-bottom: 8px;
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
   animation: shake 0.3s ease-in-out;
 }
 
@@ -113,5 +142,3 @@ li.overdue {
     transform: translateX(0);
   }
 }
-
-/* TODO Add toggling animation? */
