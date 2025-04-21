@@ -34,15 +34,15 @@
             class="inline-edit"
           />
           }
+          <div class="task-date">
+            @if (tasksService.isTaskOverdue(task))
+            {<span>🔥 Overdue! — </span>}
+            Due: {{ task.dueDate | date:'MMM d, y' }}</div>
 
           <button class="task-details-button" (click)="toggleTaskDetails(task)">🔻</button>
           <button class="delete-task-button" (click)="tasksService.deleteTask(task)">🗑️</button>
         </mat-checkbox>
         @if (isTaskExpanded(task)) {
-          <div class="task-date">
-            @if (tasksService.isTaskOverdue(task))
-            {<span>🔥 Overdue! — </span>}
-            Due: {{ task.dueDate | date:'MMM d, y' }}</div>
             <div class="task-description">{{task.description}}</div>
           }
           @if (addingSubtaskTo() === task.name)
