@@ -20,6 +20,26 @@ ul {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+.add-subtask-button,
+.task-details-button,
+.delete-task-button,
+.delete-subtask-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 8px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+li:hover .add-subtask-button,
+li:hover .task-details-button,
+li:hover .delete-task-button,
+li:hover .delete-subtask-button {
+  opacity: 1;
+}
+
 .task-date,
 .task-description {
   font-size: 0.85rem;
@@ -49,7 +69,7 @@ ul {
 }
 
 li.overdue {
-  background-color: #ffe5e5; /* Soft but dramatic pink */
+  background-color: #ffe5e5; /* soft but dramatic pink */
   border-left: 6px solid #ff5e5e;
   padding: 12px;
   border-radius: 8px;
@@ -58,7 +78,6 @@ li.overdue {
   animation: shake 0.3s ease-in-out;
 }
 
-/* Optional drama: shake animation */
 @keyframes shake {
   0% {
     transform: translateX(0);

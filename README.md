@@ -55,5 +55,5 @@ Optional: Add screenshots or a short video link demonstrating the app.
 //TODO Reflection / Documentation:
 Summarize any challenges you encountered and how you solved them.
 Mention any notable features or design decisions.
-
-Good luck on your Angular 19 CRUD application!
+//Main focus was to create a clean and basic application with advanced features (or as advanced as I could make them lol)
+//1. restructuring subtasks format and input

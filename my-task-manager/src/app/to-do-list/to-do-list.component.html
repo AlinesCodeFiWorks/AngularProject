@@ -10,11 +10,15 @@
         <mat-checkbox
           [checked]="task.completed"
           [indeterminate]="isPartiallyComplete(task)"
-          (change)="markTaskComplete(i, $event.checked)"
-        >
+          (change)="markTaskComplete(i, $event.checked)">
+          <button
+          class="add-subtask-button"
+          (click)="startAddingSubtask(task)"
+          title="Add subtask">
+          ➕</button>
           {{ task.name }}
-          <button (click)="toggleTaskDetails(task)">🔻</button>
-          <button (click)="tasksService.deleteTask(task)">🗑️</button>
+          <button class="task-details-button" (click)="toggleTaskDetails(task)">🔻</button>
+          <button class="delete-task-button" (click)="tasksService.deleteTask(task)">🗑️</button>
         </mat-checkbox>
         @if (isTaskExpanded(task)) {
           <div class="task-date">
@@ -23,6 +27,18 @@
             Due: {{ task.dueDate | date:'MMM d, y' }}</div>
             <div class="task-description">{{task.description}}</div>
           }
+          @if (addingSubtaskTo() === task.name)
+          {<div>
+            <input
+            [(ngModel)]="newSubtaskName"
+            (blur)="submitSubtask(task)"
+            (keydown.enter)="submitSubtask(task)"
+            (keydown.escape)="cancelSubtaskInput()"
+            placeholder="Enter subtask name"
+            class="subtask-input"
+            autofocus/>
+          </div>}
+
           @for (subtask of task.subtasks; track j; let j = $index) {
           <li>
             <mat-checkbox
@@ -30,7 +46,7 @@
               (change)="markSubtaskComplete(i, j, $event.checked)"
               class="list-margin"
             >
-              {{ subtask.subName }}  <button (click)="tasksService.deleteSubtask(task.name, subtask.subName)">🗑️</button>
+              {{ subtask.subName }}  <button class="delete-subtask-button" (click)="tasksService.deleteSubtask(task.name, subtask.subName)">🗑️</button>
 
             </mat-checkbox>
           </li>

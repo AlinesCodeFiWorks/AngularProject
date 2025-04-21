@@ -17,7 +17,7 @@ export class TasksService {
       ],
     },
     {
-      name: 'Eample task 2',
+      name: 'Example task 2',
       description: 'Description 2',
       dueDate: new Date('2025-04-06'),
       completed: false,
@@ -38,6 +38,21 @@ export class TasksService {
     this.tasks.update((tasks) =>
       tasks.filter((currentTask) => currentTask !== task)
     );
+  }
+
+  addSubtaskToTask(taskName: string, subtaskName: string) {
+    this.tasks.update((tasks) => {
+      return tasks.map((task) => {
+        if (task.name === taskName) {
+          const updatedSubtasks = [
+            ...(task.subtasks ?? []),
+            { subName: subtaskName, subCompleted: false },
+          ];
+          return { ...task, subtasks: updatedSubtasks };
+        }
+        return task;
+      });
+    });
   }
 
   deleteSubtask(taskName: string, subName: string) {
