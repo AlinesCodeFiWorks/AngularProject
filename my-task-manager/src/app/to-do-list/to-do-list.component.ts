@@ -86,4 +86,23 @@ export class ToDoListComponent {
     this.addingSubtaskTo.set(null);
     this.newSubtaskName = '';
   }
+
+  // trackin which task is being edited
+  editingTaskName = signal<string | null>(null);
+
+  startEditingTask(task: Task) {
+    this.editingTaskName.set(task.name);
+  }
+
+  stopEditingTask(task: Task, newName: string) {
+    const trimmed = newName.trim();
+    if (!trimmed || trimmed === task.name) {
+      this.editingTaskName.set(null);
+      return;
+    }
+
+    this.tasksService.updateTaskName(task.name, trimmed);
+
+    this.editingTaskName.set(null);
+  }
 }

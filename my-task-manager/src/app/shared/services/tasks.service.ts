@@ -88,6 +88,14 @@ export class TasksService {
     });
   }
 
+  updateTaskName(originalName: string, newName: string) {
+    this.tasks.update((tasks) =>
+      tasks.map((task) =>
+        task.name === originalName ? { ...task, name: newName } : task
+      )
+    );
+  }
+
   shareToDoList() {
     // TODO develop this feature
     const tasksJson = JSON.stringify(this.tasks());

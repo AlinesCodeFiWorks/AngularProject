@@ -16,7 +16,22 @@
           (click)="startAddingSubtask(task)"
           title="Add subtask">
           ➕</button>
-          {{ task.name }}
+
+          <!-- This was really confusing -->
+          @if (editingTaskName() !== task.name){
+          <span (click)="startEditingTask(task)">
+            {{ task.name }}
+          </span>}
+          @if (editingTaskName() === task.name){
+            <input
+            #taskInput
+            [value]="task.name"
+            (blur)="stopEditingTask(task, taskInput.value)"
+            (keydown.enter)="stopEditingTask(task, taskInput.value)"
+            class="inline-edit"
+          />
+          }
+
           <button class="task-details-button" (click)="toggleTaskDetails(task)">🔻</button>
           <button class="delete-task-button" (click)="tasksService.deleteTask(task)">🗑️</button>
         </mat-checkbox>
