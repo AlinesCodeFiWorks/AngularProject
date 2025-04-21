@@ -1,66 +1,56 @@
-# AngularProject
+# My Task Manager App
 
-Using the README file for brainstorming purposes for now.
+## Project Overview
 
-Project due: Apr 21
+This project consisted of developing a simple task management app using Angular 19. Users can add, edit, delete, and organize tasks with subtasks. Each task may include a description, due date, and subtasks. The app also includes a share feature with visual feedback through which users may share their to-do list to the provided email address.
 
-General Requirements
+## Setup Instructions
 
-Project Setup:
-Use Angular (version 19+) for the front-end. Focus on a MVP(Minimum Viable Product)
-Write all logic in TypeScript, and Utilize Signals().
-Use Standalone Components, and new @For @If Decorators
+1. Clone this repository,
+2. Run `npm install`,
+3. Run `ng serve`,
+4. Open `http://localhost:4200` in your browser.
 
-Shared Module (SharedModule):
-Create a shared module (or file) that bundles common Angular modules, directives, pipes, etc. (e.g., CommonModule, FormsModule, ReactiveFormsModule), so you don’t need to import them repeatedly in every standalone component.
+## CRUD Demonstration
 
-Basic CRUD Operations:
-Demonstrate Create, Read, Update, and Delete for a chosen data entity (e.g., “Song,” “Contact,” “Book,” etc.).
+- Create tasks (with optional description and due date)
+- Read the full to-do list with subtasks
+- Update tasks and subtasks via inline editing
+- Delete tasks and individual subtasks
+- Bonus: share the list via a dialog form (console-simulated, to be expanded upon back-end implementation)
 
-Angular Essentials:
-Components: At least 3–4 standalone components to organize your UI.
-Services: At least one service to handle data logic (add, delete, edit, retrieve).
-Templates: Use Angular’s template features (e.g., @For, bindings) to display data and handle user interactions.
-Debugging: Use the Angular CLI, console logs, or other debugging tools to ensure your code works as intended.
+## Reflection
 
-Layout & Styling:
-Incorporate your HTML, CSS, and JS skills within the Angular ecosystem.
-You may use any CSS framework (Bootstrap, Material, etc.) or custom styling.
+The main focus of this project was to create a clean and basic application with advanced features (or as advanced as I could make them at the moment).
 
-Optional Enhancements:
-Routing: Use Angular Router (standalone mode) to create multiple screens (e.g., list view vs. details/edit view).
-Validation: Validate user inputs (e.g., required fields, correct formats).
-User Experience: Provide feedback (success/error messages) after each CRUD action.
+Some of the main takeaways include:
 
-Selected Project Idea
+- How to use Angular tools to build a working application.
+- Practiced turning envisioned features into actionable steps for the development process.
+- How to structure Angular apps with signals and services.
+- How to implement Angular materials to achieve a clean and modern UI.
+- Best practices for separating logic into services.
 
-To-Do Task Manager
-Entity: “Tasks,” each with title, description, deadline, completed (boolean).
-Create: Add a new task.
-Read: List all tasks (e.g., in a table or card layout).
-Update: Mark tasks as complete or edit task info.
-Delete: Remove a task from the list.
+Notable design choices include:
 
-Deliverables
+- Using Angular Materials for featurres such as the to-do list check boxes, the share dialog, and subsequent snack bar notification.
+- Implementing more complex UI features such as nested checkboxes, and inline editing with real-time updates.
+- Toggling stacked information for a sleek design.
 
-Source Code:
-A well-structured Angular 19 project with standalone components, a shared module, and at least one service.
+Main challenges include:
 
-README.md:
-Setup Instructions: How to install and run (npm install then ng serve, etc.).
-Project Overview: Briefly explain the concept (e.g., a music playlist).
-CRUD Demonstration: Show how to perform Create, Read, Update, and Delete.
-Optional: Add screenshots or a short video link demonstrating the app.
+1. Turning envisioned features into actionable steps and visualizing it as blocks of code. AI helped greatly with scoping and mapping out the project at its inception, but also when introducing new features and iterating through the design process.
+2. Confusion with Angular syntax. Due to only recently learning Angular, a lot of very simple mistakes were made along the way. Practicing and getting caught in every single one of them seems to be the way to go.
 
-//TODO Reflection / Documentation:
-Summarize any challenges you encountered and how you solved them.
-Mention any notable features or design decisions.
-//Main focus was to create a clean and basic application with advanced features (or as advanced as I could make them lol)
-//General challenges:
-//1. turning envisioned features into actionable steps, visualizing it as blocks of code. AI helped greatly with scoping and mapping out this part.
-//2. confusing Angular syntax. Practicing and getting caught in all the mistakes seems to be the way to go.
-//More specific features
-//1. Problem: restructuring subtasks format and input. It was initially part of the task submission form but only took a string while the intention was to acommodate multiple subtasks per tasks (as set in the interface) as an array. Solution: had the input dynamically displayed under and bound to each task. Instead of parsing inputs and separating them by commas, this allowed for multiple input boxes while keeping the UI clean!
-//2. Problem: updating entries. Instead of adding a new form or feature to update existing entries, the the UI would be much cleaner with inline editing instead. Solution: created signal to track which task is being edited as well as 'start/stop editing' functions and ran the 'update' function once editing was done at 'keydown.enter' event! Used @if to keep the UI updated accordingly - to just display the existing entry when not editing (editing signal empty), and to display a form when the signal is used at the click of the existing task/subtask!
-//Honorable mentions: the (blur) event allowed for super clean and dynamic actions (fired when input loses focus - like when user clicks away or changes tabs)!
-//Next steps: 1. add task and subtask IDs for more accurate input handling. 2. extend inline editing features to due date and task descriptions as well.
+3. Restructuring subtasks format and input. Subtasks were initially part of the task submission form, however, this input only took a string whereas the intention was to acommodate multiple subtasks per tasks (as set in the interface) in the form of an array. The developed solution was to have said input dynamically displayed under and bound to each task. Instead of parsing inputs and separating them by commas, this allowed for multiple input boxes while keeping the UI clean and intuitive.
+
+4. Updating entries. Instead of adding a new form or feature to update existing entries, inline editing instead would allow for a sleek, better-organized interface. In order to acoomplish this, a signal was created to track which task is being edited as well as 'start/stop editing' functions. The 'update' function is then run once editing is completed and the 'eneter' key activated. The UI was kept updated accordingly through the use of @if to display the existing entry when idle (editing signal empty), and to display the appropriate input when the signal is used at the click of the targeted entry.
+
+Honorable mention:
+
+- The (blur) event allowed for clean and dynamic interactions (fired when input loses focus - like when user clicks away or changes tabs).
+
+Next steps:
+
+1. Add task and subtask IDs for more accurate input handling.
+2. Etend inline editing features to include due date and task descriptions as well.
