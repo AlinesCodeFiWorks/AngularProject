@@ -11,6 +11,18 @@ label {
   margin-bottom: 4px;
 }
 
+.new-task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.new-task-header button {
+  padding: 5px;
+  margin: 5px;
+}
+
 input,
 textarea {
   padding: 8px;
