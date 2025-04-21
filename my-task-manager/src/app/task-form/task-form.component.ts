@@ -22,12 +22,6 @@ export class TaskFormComponent {
 
   @ViewChild('form') form?: ElementRef<HTMLFormElement>;
 
-  showFormDetails = signal(false);
-  //TODO find a way to move onToggleDetails() to tasks.service.js
-  onToggleDetails() {
-    this.showFormDetails.set(!this.showFormDetails());
-  }
-
   newTask: Task = {
     name: '',
     description: '',

@@ -39,7 +39,6 @@ export class TasksService {
       tasks.filter((currentTask) => currentTask !== task)
     );
   }
-
   addSubtaskToTask(taskName: string, subtaskName: string) {
     this.tasks.update((tasks) => {
       return tasks.map((task) => {
@@ -54,7 +53,6 @@ export class TasksService {
       });
     });
   }
-
   deleteSubtask(taskName: string, subName: string) {
     this.tasks.update((tasks) => {
       return tasks.map((task) => {
@@ -67,7 +65,10 @@ export class TasksService {
       });
     });
   }
-
+  showFormDetails = signal(false);
+  onToggleDetails() {
+    this.showFormDetails.set(!this.showFormDetails());
+  }
   isTaskOverdue(task: Task): boolean {
     if (!task.dueDate) return false;
     // troubleshooting note: zeroing time on both dates using the .setHours() built-in method to keep times from interfering on the comparison
@@ -108,12 +109,5 @@ export class TasksService {
         return { ...task, subtasks: updatedSubtasks };
       });
     });
-  }
-
-  shareToDoList() {
-    // TODO develop this feature
-    const tasksJson = JSON.stringify(this.tasks());
-    const encodedTasks = encodeURIComponent(tasksJson);
-    const shareLink = `${window.location.origin}/shared-tasks?data=${encodedTasks}`;
   }
 }

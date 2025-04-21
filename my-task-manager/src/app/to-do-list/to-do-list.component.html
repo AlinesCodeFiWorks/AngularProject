@@ -6,7 +6,6 @@
     <span class="task-section">
       @for (task of tasksService.tasks(); track i; let i = $index) {
       <li [class.overdue]="tasksService.isTaskOverdue(task)">
-        <!-- TODO Add option to hide subtasks in addition to expanding individual task details -->
         <mat-checkbox
           [checked]="task.completed"
           [indeterminate]="isPartiallyComplete(task)"
