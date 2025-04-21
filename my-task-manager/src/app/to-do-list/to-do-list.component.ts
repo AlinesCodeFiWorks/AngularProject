@@ -1,18 +1,28 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TasksService } from '../shared/services/tasks.service';
 import { Task } from '../shared/task.model';
-import { CommonModule } from '@angular/common';
+import { SharedModule } from '../shared/shared.module';
+import { ShareToDoListComponent } from '../share-to-do-list/share-to-do-list.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-to-do-list',
-  imports: [CommonModule, MatCheckboxModule, FormsModule],
+  imports: [SharedModule],
   standalone: true,
   templateUrl: './to-do-list.component.html',
   styleUrl: './to-do-list.component.css',
 })
 export class ToDoListComponent {
+  constructor(private dialog: MatDialog) {}
+
+  openShareDialog() {
+    this.dialog.open(ShareToDoListComponent, {
+      width: '400px',
+      disableClose: false,
+      autoFocus: true,
+    });
+  }
+
   tasksService = inject(TasksService);
   readonly toDoList = this.tasksService.getTasks();
 

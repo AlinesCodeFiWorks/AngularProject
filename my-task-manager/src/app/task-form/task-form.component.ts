@@ -1,18 +1,11 @@
-import {
-  Component,
-  ElementRef,
-  inject,
-  viewChild,
-  signal,
-  ViewChild,
-} from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { TasksService } from '../shared/services/tasks.service';
 import { Task } from '../shared/task.model';
+import { SharedModule } from '../shared/shared.module';
 
 @Component({
   selector: 'app-task-form',
-  imports: [FormsModule],
+  imports: [SharedModule],
   standalone: true,
   templateUrl: './task-form.component.html',
   styleUrl: './task-form.component.css',

@@ -1,6 +1,9 @@
 <div class="to-do-list-container">
   <h2>TO-DO</h2>
-  <ng-content select="app-share-to-do-list"></ng-content>
+  <button (click)="openShareDialog()">
+    <img src="https://static-00.iconduck.com/assets.00/email-icon-256x203-zt992cix.png" alt="Email to-do list" width="25px" />
+  </button>
+
   <ng-content select="app-task-form"></ng-content>
   <section class="to-do-list-section">
     <span class="task-section">
