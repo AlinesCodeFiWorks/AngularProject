@@ -27,5 +27,54 @@ ul {
   font-style: italic;
   margin-top: 4px;
 }
+/* omg this turned out so dramatic - I love it lol */
+.task-date.overdue {
+  background-color: #ffe5e5;
+  border-left: 4px solid #ff5e5e;
+  color: #d40000;
+  font-weight: bold;
+  font-style: normal;
+  padding: 6px 10px;
+  border-radius: 6px;
+  display: inline-block;
+  box-shadow: 0 0 4px rgba(255, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+.task-date.overdue:hover {
+  transform: scale(1.05) rotate(-1deg);
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+  background-color: #ffdada;
+  cursor: pointer;
+}
+
+li.overdue {
+  background-color: #ffe5e5; /* Soft but dramatic pink */
+  border-left: 6px solid #ff5e5e;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+  animation: shake 0.3s ease-in-out;
+}
+
+/* Optional drama: shake animation */
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  50% {
+    transform: translateX(2px);
+  }
+  75% {
+    transform: translateX(-1px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
 
 /* TODO Add toggling animation? */

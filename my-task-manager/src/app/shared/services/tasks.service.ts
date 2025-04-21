@@ -53,6 +53,17 @@ export class TasksService {
     });
   }
 
+  isTaskOverdue(task: Task): boolean {
+    if (!task.dueDate) return false;
+    // troubleshooting note: zeroing time on both dates using the .setHours() built-in method to keep times from interfering on the comparison
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const dueDate = new Date(task.dueDate);
+    dueDate.setHours(0, 0, 0, 0);
+    //and then here we check if the task is overdue without any time-of-day shenanigans!
+    return dueDate < today && !task.completed;
+  }
+
   updateTask(updatedTask: Task) {
     //TODO update task
   }

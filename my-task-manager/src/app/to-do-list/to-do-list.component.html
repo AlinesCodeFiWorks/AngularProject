@@ -5,7 +5,7 @@
   <section class="to-do-list-section">
     <span class="task-section">
       @for (task of tasksService.tasks(); track i; let i = $index) {
-      <li>
+      <li [class.overdue]="tasksService.isTaskOverdue(task)">
         <!-- TODO Add option to hide subtasks in addition to expanding individual task details -->
         <mat-checkbox
           [checked]="task.completed"
@@ -17,7 +17,11 @@
           <button (click)="tasksService.deleteTask(task)">🗑️</button>
         </mat-checkbox>
         @if (isTaskExpanded(task)) {
-          <div class="task-date">Due: {{ task.dueDate | date:'MMM d, y' }}</div>          <div class="task-description">{{task.description}}</div>
+          <div class="task-date">
+            @if (tasksService.isTaskOverdue(task))
+            {<span>🔥 Overdue! — </span>}
+            Due: {{ task.dueDate | date:'MMM d, y' }}</div>
+            <div class="task-description">{{task.description}}</div>
           }
           @for (subtask of task.subtasks; track j; let j = $index) {
           <li>

@@ -14,7 +14,7 @@ export class ShareToDoListComponent {
 
   emailAddress: string = '';
 
-  //TODO Move the fumctions below to the service once properly working
+  //TODO Move the functions below to the service once properly working
 
   getEmailAddress() {
     return this.emailAddress;
