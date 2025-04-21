@@ -61,7 +61,23 @@
               (change)="markSubtaskComplete(i, j, $event.checked)"
               class="list-margin"
             >
-              {{ subtask.subName }}  <button class="delete-subtask-button" (click)="tasksService.deleteSubtask(task.name, subtask.subName)">🗑️</button>
+
+            @if (!isEditingSubtask(task, subtask.subName)) {
+              <span (click)="startEditingSubtask(task, subtask)">
+                {{ subtask.subName }}
+              </span>
+            }
+            @if (isEditingSubtask(task, subtask.subName)) {
+              <input
+                #subtaskInput
+                [value]="subtask.subName"
+                (blur)="stopEditingSubtask(task, subtask.subName, subtaskInput.value)"
+                (keydown.enter)="stopEditingSubtask(task, subtask.subName, subtaskInput.value)"
+                class="inline-edit"
+              />
+            }
+
+              <button class="delete-subtask-button" (click)="tasksService.deleteSubtask(task.name, subtask.subName)">🗑️</button>
 
             </mat-checkbox>
           </li>

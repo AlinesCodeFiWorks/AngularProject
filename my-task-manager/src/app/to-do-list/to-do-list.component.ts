@@ -105,4 +105,30 @@ export class ToDoListComponent {
 
     this.editingTaskName.set(null);
   }
+  editingSubtaskKey = signal<{ taskName: string; subName: string } | null>(
+    null
+  );
+
+  startEditingSubtask(task: Task, subtask: { subName: string }) {
+    this.editingSubtaskKey.set({
+      taskName: task.name,
+      subName: subtask.subName,
+    });
+  }
+
+  stopEditingSubtask(task: Task, oldSubName: string, newSubName: string) {
+    const trimmed = newSubName.trim();
+    if (!trimmed || trimmed === oldSubName) {
+      this.editingSubtaskKey.set(null);
+      return;
+    }
+
+    this.tasksService.updateSubtaskName(task.name, oldSubName, trimmed);
+    this.editingSubtaskKey.set(null);
+  }
+
+  isEditingSubtask(task: Task, subName: string) {
+    const key = this.editingSubtaskKey();
+    return key?.taskName === task.name && key?.subName === subName;
+  }
 }

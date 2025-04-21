@@ -96,6 +96,20 @@ export class TasksService {
     );
   }
 
+  updateSubtaskName(taskName: string, oldSubName: string, newSubName: string) {
+    this.tasks.update((tasks) => {
+      return tasks.map((task) => {
+        if (task.name !== taskName) return task;
+
+        const updatedSubtasks = task.subtasks?.map((sub) =>
+          sub.subName === oldSubName ? { ...sub, subName: newSubName } : sub
+        );
+
+        return { ...task, subtasks: updatedSubtasks };
+      });
+    });
+  }
+
   shareToDoList() {
     // TODO develop this feature
     const tasksJson = JSON.stringify(this.tasks());
