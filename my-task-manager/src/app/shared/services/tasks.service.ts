@@ -80,8 +80,14 @@ export class TasksService {
   }
 
   updateTask(updatedTask: Task) {
-    //TODO update task
+    //inline editing: *should* work for name, description, due date, and subtasks!
+    this.tasks.update((tasks) => {
+      return tasks.map((task) =>
+        task.name === updatedTask.name ? { ...updatedTask } : task
+      );
+    });
   }
+
   shareToDoList() {
     // TODO develop this feature
     const tasksJson = JSON.stringify(this.tasks());

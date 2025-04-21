@@ -1,10 +1,13 @@
 html,
 body {
   height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
 }
 body {
   font-family: "Fraunces", serif;
-  background-color: #f8f5ff; /* Soft lavender background */
+  background-color: #f8f5ff;
   color: #444;
   margin: 0;
   padding: 0;
@@ -34,22 +37,17 @@ button {
 button:hover {
   opacity: 0.8;
 }
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: #f8f5ff; /* Soft lavender background */
-  padding: 10px;
-  text-align: start;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-footer {
-  position: fixed;
-  bottom: 0;
-}
+
 li {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #d4d4d4;
+  border-radius: 10px;
 }

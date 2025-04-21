@@ -23,7 +23,7 @@ export class TaskFormComponent {
   @ViewChild('form') form?: ElementRef<HTMLFormElement>;
 
   showFormDetails = signal(false);
-  //TODO find a wat to mode onToggleDetails() to tasks.service.js
+  //TODO find a way to move onToggleDetails() to tasks.service.js
   onToggleDetails() {
     this.showFormDetails.set(!this.showFormDetails());
   }
