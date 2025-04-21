@@ -6,7 +6,8 @@ footer {
   padding: 10px;
   text-align: end;
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-  font-weight: 600;
+  font-weight: 400;
+  font-size: small;
   color: #6a5acd;
   margin-top: auto;
 }
