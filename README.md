@@ -56,5 +56,11 @@ Optional: Add screenshots or a short video link demonstrating the app.
 Summarize any challenges you encountered and how you solved them.
 Mention any notable features or design decisions.
 //Main focus was to create a clean and basic application with advanced features (or as advanced as I could make them lol)
-//1. Problem: restructuring subtasks format and input: initially part of the task submission form but form only took a string and the intention was to acommodate multiple subtasks per tasks (as set in the interface) as an array. Solution: had the input dynamically displayed under and bound to each task. Instead of parsing inputs and separating them by commas, this allowed for multiple input boxes while keeping the UI clean!
-//Next steps: 1. add task and subtask IDs for more accurate input handling
+//General challenges:
+//1. turning envisioned features into actionable steps, visualizing it as blocks of code. AI helped greatly with scoping and mapping out this part.
+//2. confusing Angular syntax. Practicing and getting caught in all the mistakes seems to be the way to go.
+//More specific features
+//1. Problem: restructuring subtasks format and input. It was initially part of the task submission form but only took a string while the intention was to acommodate multiple subtasks per tasks (as set in the interface) as an array. Solution: had the input dynamically displayed under and bound to each task. Instead of parsing inputs and separating them by commas, this allowed for multiple input boxes while keeping the UI clean!
+//2. Problem: updating entries. Instead of adding a new form or feature to update existing entries, the the UI would be much cleaner with inline editing instead. Solution: created signal to track which task is being edited as well as 'start/stop editing' functions and ran the 'update' function once editing was done at 'keydown.enter' event! Used @if to keep the UI updated accordingly - to just display the existing entry when not editing (editing signal empty), and to display a form when the signal is used at the click of the existing task/subtask!
+//Honorable mentions: the (blur) event allowed for super clean and dynamic actions (fired when input loses focus - like when user clicks away or changes tabs)!
+//Next steps: 1. add task and subtask IDs for more accurate input handling. 2. extend inline editing features to due date and task descriptions as well.

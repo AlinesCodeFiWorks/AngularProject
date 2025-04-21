@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TasksService } from '../shared/services/tasks.service';
+import { FeedbackService } from '../shared/services/feedback.service';
 
 @Component({
   selector: 'app-share-to-do-list',
@@ -11,26 +12,19 @@ import { TasksService } from '../shared/services/tasks.service';
 })
 export class ShareToDoListComponent {
   tasksService = inject(TasksService);
-
-  emailAddress: string = '';
-
-  //TODO Move the functions below to the service once properly working
+  feedbackService = inject(FeedbackService);
 
   getEmailAddress() {
-    return this.emailAddress;
+    return this.feedbackService.emailAddress;
+  }
+
+  toggleForm() {
+    this.feedbackService.toggleShareForm();
   }
 
   emailMessage() {
-    // this.getEmailAddress();
-    // if (this.emailAddress) {
-    // this.shareLink = `mailto:${this.emailAddress}?subject=To-Do List&body=${this.tasksService.getTasks()}`;
-    this.getEmailAddress();
-    console.log(
-      `mailto:${this.emailAddress} To-do: ${this.tasksService.getTasks()}`
-    );
-    // }
-  }
-  ngOnSubmit() {
-    this.emailMessage();
+    const tasks = this.tasksService.getTasks();
+    this.feedbackService.logSharedTasks(tasks());
+    this.feedbackService.resetShareForm();
   }
 }
