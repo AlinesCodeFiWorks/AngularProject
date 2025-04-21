@@ -49,8 +49,11 @@ Main challenges include:
 Honorable mention:
 
 - The (blur) event allowed for clean and dynamic interactions (fired when input loses focus - like when user clicks away or changes tabs).
+- Date comparisons for signaling overdue tasks.
 
 Next steps:
 
 1. Add task and subtask IDs for more accurate input handling.
-2. Etend inline editing features to include due date and task descriptions as well.
+2. Extend inline editing features to include due date and task descriptions as well.
+3. Better organize code for improved readability.
+4. Implement new features: user validation, login page with authentication, implement backend and activate email-sharing feature.
