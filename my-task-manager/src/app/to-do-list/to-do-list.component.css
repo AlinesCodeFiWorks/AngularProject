@@ -49,6 +49,7 @@ ul {
   border-bottom: 1px solid #eee;
   border-radius: 6px;
   margin-bottom: 8px;
+  box-shadow: 0 0 4px rgba(85, 80, 80, 0.3);
 }
 
 mat-checkbox {
@@ -96,6 +97,7 @@ li:hover .delete-subtask-button {
   color: #888;
   font-style: italic;
   margin-top: 4px;
+  display: inline;
 }
 
 /* omg this turned out so dramatic - I love it lol */
