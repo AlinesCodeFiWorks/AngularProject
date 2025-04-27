@@ -3,7 +3,12 @@
   --background-color: #f8f5ff;
   --scrollbar-background-color: #d4d4d4;
   --generic-text-color: #444;
+  --detailed-text-color: #888;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --high-contrast-shadow-color: rgba(85, 80, 80, 0.3);
   --main-accent-color: #6a5acd;
+  --high-contrast-accent-color: white;
+  --input-area-color: #ccc;
 }
 
 html,
@@ -13,6 +18,7 @@ body {
   padding: 0;
   overflow-y: auto;
 }
+
 body {
   font-family: "Fraunces", serif;
   background-color: var(--background-color);

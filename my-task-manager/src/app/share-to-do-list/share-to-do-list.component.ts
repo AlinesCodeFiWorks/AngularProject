@@ -12,6 +12,12 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrl: './share-to-do-list.component.css',
 })
 export class ShareToDoListComponent {
+  constructor(
+    private tasksService: TasksService,
+    public feedbackService: FeedbackService,
+    public dialogRef: MatDialogRef<ShareToDoListComponent>
+  ) {}
+
   getEmailAddress() {
     return this.feedbackService.emailAddress;
   }
@@ -19,12 +25,6 @@ export class ShareToDoListComponent {
   toggleForm() {
     this.feedbackService.toggleShareForm();
   }
-
-  constructor(
-    private tasksService: TasksService,
-    public feedbackService: FeedbackService,
-    public dialogRef: MatDialogRef<ShareToDoListComponent>
-  ) {}
 
   emailMessage() {
     const tasks = this.tasksService.getTasks();

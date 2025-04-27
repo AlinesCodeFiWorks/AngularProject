@@ -5,11 +5,14 @@
     <img src="https://static-00.iconduck.com/assets.00/email-icon-256x203-zt992cix.png" alt="Email to-do list" width="25px" />
   </button>
 </div>
+
   <ng-content select="app-task-form"></ng-content>
+
   <section class="to-do-list-section">
     <span class="task-section">
       @for (task of tasksService.tasks(); track i; let i = $index) {
       <li [class.overdue]="tasksService.isTaskOverdue(task)">
+
         <mat-checkbox
           [checked]="task.completed"
           [indeterminate]="isPartiallyComplete(task)"
@@ -25,26 +28,31 @@
           <span (click)="startEditingTask(task)">
             {{ task.name }}
           </span>}
+
           @if (editingTaskName() === task.name){
             <input
             #taskInput
             [value]="task.name"
             (blur)="stopEditingTask(task, taskInput.value)"
             (keydown.enter)="stopEditingTask(task, taskInput.value)"
-            class="inline-edit"
-          />
+            class="inline-edit"/>
           }
+
           <div class="task-date">
             @if (tasksService.isTaskOverdue(task))
             {<span>🔥 Overdue! — </span>}
             Due: {{ task.dueDate | date:'MMM d, y' }}</div>
 
-          <button class="task-details-button" (click)="toggleTaskDetails(task)">🔻</button>
-          <button class="delete-task-button" (click)="tasksService.deleteTask(task)">🗑️</button>
+            <button class="task-details-button" (click)="toggleTaskDetails(task)">🔻</button>
+
+            <button class="delete-task-button" (click)="tasksService.deleteTask(task)">🗑️</button>
+
         </mat-checkbox>
+
         @if (isTaskExpanded(task)) {
             <div class="task-description">{{task.description}}</div>
           }
+
           @if (addingSubtaskTo() === task.name)
           {<div>
             <input
@@ -70,23 +78,23 @@
                 {{ subtask.subName }}
               </span>
             }
+
             @if (isEditingSubtask(task, subtask.subName)) {
               <input
                 #subtaskInput
                 [value]="subtask.subName"
                 (blur)="stopEditingSubtask(task, subtask.subName, subtaskInput.value)"
                 (keydown.enter)="stopEditingSubtask(task, subtask.subName, subtaskInput.value)"
-                class="inline-edit"
-              />
+                class="inline-edit"/>
             }
 
               <button class="delete-subtask-button" (click)="tasksService.deleteSubtask(task.name, subtask.subName)">🗑️</button>
-
             </mat-checkbox>
           </li>
           }
       </li>
       }@empty{No tasks available.}
+
     </span>
   </section>
 </div>

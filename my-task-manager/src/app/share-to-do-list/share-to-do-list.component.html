@@ -1,11 +1,11 @@
 <form (submit)="emailMessage(); $event.preventDefault()">
-  <label for="emailAddress">Email address:</label>
+  <label for="emailAddress">Share my to-do list with:</label>
   <input
     type="email"
     name="emailAddress"
     id="emailAddress"
     required
-    placeholder="Enter your email address"
+    placeholder="email address"
     [ngModel]="feedbackService.emailAddress()"
     (ngModelChange)="feedbackService.emailAddress.set($event)"
   />

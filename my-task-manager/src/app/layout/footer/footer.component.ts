@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { SharedModule } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-footer',
-  imports: [],
+  imports: [SharedModule],
   standalone: true,
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.css',

@@ -7,7 +7,7 @@ form {
 
 label {
   font-weight: 500;
-  color: #6a5acd;
+  color: var(--main-accent-color);
   margin-bottom: 4px;
 }
 
@@ -27,15 +27,15 @@ input,
 textarea {
   padding: 8px;
   font-size: 0.95rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--input-area-color);
   border-radius: 6px;
   width: 100%;
   box-sizing: border-box;
 }
 
 button[type="submit"] {
-  background-color: #6a5acd;
-  color: white;
+  background-color: var(--main-accent-color);
+  color: var(--high-contrast-accent-color);
   font-weight: 600;
   border: none;
   border-radius: 6px;
@@ -45,5 +45,5 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background-color: #5741c4;
+  background-color: var(--main-accent-color);
 }

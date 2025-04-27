@@ -3,25 +3,26 @@
   padding: 16px;
   max-width: 400px;
   width: 100%;
-  background-color: #bdb0f8;
+  background-color: var(--background-color);
 }
 
 form {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  margin: 12px;
 }
 
 input {
   padding: 8px;
   font-size: 0.95rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--input-area-color);
   border-radius: 6px;
 }
 
 button[type="submit"] {
-  background-color: #6a5acd;
-  color: white;
+  background-color: var(--main-accent-color);
+  color: var(--high-contrast-accent-color);
   font-weight: 600;
   padding: 10px 16px;
   border: none;
