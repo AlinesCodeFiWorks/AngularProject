@@ -16,7 +16,8 @@
         <mat-checkbox
           [checked]="task.completed"
           [indeterminate]="isPartiallyComplete(task)"
-          (change)="markTaskComplete(i, $event.checked)">
+          (change)="markTaskComplete(i, $event.checked)"
+          class="checkbox">
           <button
           class="add-subtask-button"
           (click)="startAddingSubtask(task)"
@@ -39,9 +40,8 @@
           }
 
           <div class="task-date">
-            @if (tasksService.isTaskOverdue(task))
-            {<span>🔥 Overdue! — </span>}
-            Due: {{ task.dueDate | date:'MMM d, y' }}</div>
+            Due: {{ task.dueDate | date:'MMM d, y' }} @if (tasksService.isTaskOverdue(task))
+            {<span>🔥 Overdue!</span>}</div>
 
             <button class="task-details-button" (click)="toggleTaskDetails(task)">🔻</button>
 

@@ -15,28 +15,11 @@ import { MatDialog } from '@angular/material/dialog';
 export class ToDoListComponent {
   constructor(private dialog: MatDialog) {}
 
-  openShareDialog() {
-    this.dialog.open(ShareToDoListComponent, {
-      width: '400px',
-      disableClose: false,
-      autoFocus: true,
-    });
-  }
-
   tasksService = inject(TasksService);
   readonly toDoList = this.tasksService.getTasks();
 
-  taskDetailsVisibility = new Map<string, boolean>();
-
-  isTaskExpanded(task: Task): boolean {
-    return this.taskDetailsVisibility.get(task.name) ?? false;
-  }
-
-  toggleTaskDetails(task: Task) {
-    const current = this.taskDetailsVisibility.get(task.name) ?? false;
-    this.taskDetailsVisibility.set(task.name, !current);
-  }
-
+  //Component signals
+  addingSubtaskTo = signal<string | null>(null);
   readonly partiallyComplete = computed(() => {
     const tasks = this.toDoList();
     return tasks.some(
@@ -45,14 +28,37 @@ export class ToDoListComponent {
         !task.subtasks?.every((t) => t.subCompleted)
     );
   });
+  editingTaskName = signal<string | null>(null); // Tracking which task is being edited
+  editingSubtaskKey = signal<{ taskName: string; subName: string } | null>(
+    null
+  );
 
+  //Mat dialog material component for sharing the to-do list
+  openShareDialog() {
+    this.dialog.open(ShareToDoListComponent, {
+      width: '400px',
+      disableClose: false,
+      autoFocus: true,
+    });
+  }
+
+  // Task detals toggling
+  taskDetailsVisibility = new Map<string, boolean>();
+  isTaskExpanded(task: Task): boolean {
+    return this.taskDetailsVisibility.get(task.name) ?? false;
+  }
+  toggleTaskDetails(task: Task) {
+    const current = this.taskDetailsVisibility.get(task.name) ?? false;
+    this.taskDetailsVisibility.set(task.name, !current);
+  }
+
+  // Task completion tracking (from checkbox material component)
   isPartiallyComplete(task: Task): boolean | undefined {
     return (
       task.subtasks?.some((s) => s.subCompleted) &&
       !task.subtasks?.every((s) => s.subCompleted)
     );
   }
-
   markTaskComplete(taskIndex: number, completed: boolean) {
     this.toDoList.update((tasks) => {
       const task = tasks[taskIndex];
@@ -61,7 +67,6 @@ export class ToDoListComponent {
       return [...tasks];
     });
   }
-
   markSubtaskComplete(
     taskIndex: number,
     subtaskIndex: number,
@@ -76,10 +81,10 @@ export class ToDoListComponent {
       return [...tasks];
     });
   }
-  // More troubleshooting notes: tracking which task is currently getting a new subtask
-  addingSubtaskTo = signal<string | null>(null);
-  newSubtaskName = '';
 
+  // Subtask submission tracking
+  // More troubleshooting notes: tracking which task is currently getting a new subtask
+  newSubtaskName = '';
   startAddingSubtask(task: Task) {
     this.addingSubtaskTo.set(task.name);
   }
@@ -87,7 +92,6 @@ export class ToDoListComponent {
     this.addingSubtaskTo.set(null);
     this.newSubtaskName = '';
   }
-
   submitSubtask(task: Task) {
     const name = this.newSubtaskName.trim();
     if (!name) return;
@@ -97,9 +101,7 @@ export class ToDoListComponent {
     this.newSubtaskName = '';
   }
 
-  // trackin which task is being edited
-  editingTaskName = signal<string | null>(null);
-
+  //Inline editing
   startEditingTask(task: Task) {
     this.editingTaskName.set(task.name);
   }
@@ -110,14 +112,9 @@ export class ToDoListComponent {
       this.editingTaskName.set(null);
       return;
     }
-
     this.tasksService.updateTaskName(task.name, trimmed);
-
     this.editingTaskName.set(null);
   }
-  editingSubtaskKey = signal<{ taskName: string; subName: string } | null>(
-    null
-  );
 
   startEditingSubtask(task: Task, subtask: { subName: string }) {
     this.editingSubtaskKey.set({
@@ -141,7 +138,7 @@ export class ToDoListComponent {
     const key = this.editingSubtaskKey();
     return key?.taskName === task.name && key?.subName === subName;
   }
-    // ngAfterViewChecked() {
+  // ngAfterViewChecked() {
   //   const container = document.querySelector('mat-checkbox'); if(container){container.style.color = "black";
   // }}
 }
