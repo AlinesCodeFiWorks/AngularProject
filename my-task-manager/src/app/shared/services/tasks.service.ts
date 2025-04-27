@@ -8,7 +8,7 @@ export class TasksService {
   tasks = signal<Task[]>([
     {
       name: 'Sample task',
-      description: 'SAmple description',
+      description: 'Sample description',
       dueDate: new Date('2025-04-06'),
       completed: false,
       subtasks: [
@@ -71,7 +71,6 @@ export class TasksService {
   }
 
   updateTask(updatedTask: Task) {
-    //inline editing: *should* work for name, description, due date, and subtasks!
     this.tasks.update((tasks) => {
       return tasks.map((task) =>
         task.name === updatedTask.name ? { ...updatedTask } : task

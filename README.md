@@ -53,7 +53,7 @@ Honorable mention:
 
 Next steps:
 
-1. Add task and subtask IDs for more accurate input handling.
-2. Extend inline editing features to include due date and task descriptions as well.
-3. Better organize code for improved readability.
-4. Implement new features: user validation, login page with authentication, implement backend and activate email-sharing feature.
+1. TODO Add task and subtask IDs for more accurate input handling.
+2. TODO Extend inline editing features to include due date and task descriptions as well.
+3. TODO Better organize code for improved readability.
+4. TODO Implement new features: user validation, login page with authentication, implement backend and activate email-sharing feature.

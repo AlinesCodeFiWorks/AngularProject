@@ -1,3 +1,11 @@
+:root {
+  /* TODO Assemble color palette */
+  --background-color: #f8f5ff;
+  --scrollbar-background-color: #d4d4d4;
+  --generic-text-color: #444;
+  --main-accent-color: #6a5acd;
+}
+
 html,
 body {
   height: 100%;
@@ -7,8 +15,8 @@ body {
 }
 body {
   font-family: "Fraunces", serif;
-  background-color: #f8f5ff;
-  color: #444;
+  background-color: var(--background-color);
+  color: var(--generic-text-color);
   margin: 0;
   padding: 0;
   display: flex;
@@ -29,7 +37,7 @@ body {
 h2 {
   font-weight: 600;
   font-size: 1.5rem;
-  color: #6a5acd;
+  color: var(--main-accent-color);
   margin-bottom: 16px;
 }
 
@@ -56,6 +64,6 @@ li {
   width: 8px;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #d4d4d4;
+  background-color: var(--background-color);
   border-radius: 10px;
 }
